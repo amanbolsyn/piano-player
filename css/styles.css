@@ -1,0 +1,163 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.piano-container {
+  display: grid;
+  grid-template-areas: "piano";
+  width: inherit;
+  height: inherit;
+  place-items: center;
+}
+.piano-white-keys {
+  grid-area: piano;
+  display: grid;
+  grid-template-areas: "white-key-1 white-key-2 white-key-3 white-key-4 white-key-5 white-key-6 white-key-7 white-key-8 white-key-9 white-key-10 white-key-11 white-key-12 white-key-13 white-key-14 white-key-15 white-key-16 white-key-17";
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(17, 1fr);
+  width: 80vw;
+  height: 30vh;
+}
+
+.white-key {
+  background-color: rgb(251, 253, 254);
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 0px 0px 0.3rem 0.3rem;
+}
+
+.white-key a {
+  display: block;
+  margin-top: 25vh;
+  margin-bottom: 1vh;
+  z-index: 1;
+}
+
+.white-key-1 {
+  grid-area: white-key-1;
+}
+.white-key-2 {
+  grid-area: white-key-2;
+}
+.white-key-3 {
+  grid-area: white-key-3;
+}
+.white-key-4 {
+  grid-area: white-key-4;
+}
+.white-key-5 {
+  grid-area: white-key-5;
+}
+.white-key-6 {
+  grid-area: white-key-6;
+}
+.white-key-7 {
+  grid-area: white-key-7;
+}
+.white-key-8 {
+  grid-area: white-key-8;
+}
+.white-key-9 {
+  grid-area: white-key-9;
+}
+.white-key-10 {
+  grid-area: white-key-10;
+}
+.white-key-11 {
+  grid-area: white-key-11;
+}
+.white-key-12 {
+  grid-area: white-key-12;
+}
+.white-key-13 {
+  grid-area: white-key-13;
+}
+.white-key-14 {
+  grid-area: white-key-14;
+}
+.white-key-15 {
+  grid-area: white-key-15;
+}
+.white-key-16 {
+  grid-area: white-key-16;
+}
+.white-key-17 {
+  grid-area: white-key-17;
+}
+
+.piano-black-keys {
+  position: absolute;
+  width: 80vw;
+  height: 30vh;
+}
+
+.black-key {
+  display: inline-block;
+  background-color: rgb(80, 80, 80);
+  border-radius: 0px 0px 0.3rem 0.3rem;
+  height: 15vh;
+  width: 4%;
+  /* text-align: center; */
+}
+
+.black-key a {
+  z-index: 2;
+}
+.black-key-1 {
+  position: relative;
+  left: 3%;
+}
+.black-key-2 {
+  position: relative;
+  left: 4.5%;
+}
+.black-key-3 {
+  position: relative;
+  left: 12%;
+}
+.black-key-4 {
+  position: relative;
+  left: 13.5%;
+}
+.black-key-5 {
+  position: relative;
+  left: 15%;
+}
+.black-key-6 {
+  position: relative;
+  left: 22.5%;
+}
+.black-key-7 {
+  position: relative;
+  left: 24%;
+}
+.black-key-8 {
+  position: relative;
+  left: 31.4%;
+}
+.black-key-9 {
+  position: relative;
+  left: 33%;
+}
+.black-key-10 {
+  position: relative;
+  left: 34.7%;
+}
+.black-key-11 {
+  position: relative;
+
+  left: 42%;
+}
+.black-key-12 {
+  position: absolute;
+  left: 92%;
+}
+
+
+@media only screen and (max-width:375px){
+    .piano-container {
+        display:none;
+    }
+}
