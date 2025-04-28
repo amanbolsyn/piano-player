@@ -18,6 +18,7 @@ body {
   grid-template-rows: 1fr;
   grid-template-columns: repeat(17, 1fr);
   width: 80vw;
+  max-width: 1440px;
   height: 30vh;
 }
 
@@ -32,6 +33,7 @@ body {
   display: block;
   margin-top: 25vh;
   margin-bottom: 1vh;
+  font-size:1.7em;
   z-index: 1;
 }
 
@@ -90,7 +92,9 @@ body {
 .piano-black-keys {
   position: absolute;
   width: 80vw;
+  max-width: 1440px;
   height: 30vh;
+  font-size: 1.7em;
 }
 
 .black-key {
@@ -99,56 +103,54 @@ body {
   border-radius: 0px 0px 0.3rem 0.3rem;
   height: 15vh;
   width: 4%;
-  /* text-align: center; */
 }
 
 .black-key a {
   z-index: 2;
 }
 .black-key-1 {
-  position: relative;
+  position: absolute;
   left: 3%;
 }
 .black-key-2 {
-  position: relative;
-  left: 4.5%;
+  position: absolute;
+  left: 9%;
 }
 .black-key-3 {
-  position: relative;
-  left: 12%;
+  position: absolute;
+  left: 20.8%;
 }
 .black-key-4 {
-  position: relative;
-  left: 13.5%;
+  position: absolute;
+  left: 26.5%;
 }
 .black-key-5 {
-  position: relative;
-  left: 15%;
+  position: absolute;
+  left: 32.5%;
 }
 .black-key-6 {
-  position: relative;
-  left: 22.5%;
+  position: absolute;
+  left: 44.3%;
 }
 .black-key-7 {
-  position: relative;
-  left: 24%;
+  position: absolute;
+  left: 50.2%;
 }
 .black-key-8 {
-  position: relative;
-  left: 31.4%;
+  position: absolute;
+  left: 62%;
 }
 .black-key-9 {
-  position: relative;
-  left: 33%;
+  position: absolute;
+  left: 68%;
 }
 .black-key-10 {
-  position: relative;
-  left: 34.7%;
+  position: absolute;
+  left: 73.8%;
 }
 .black-key-11 {
-  position: relative;
-
-  left: 42%;
+  position: absolute;
+  left: 85.5%;
 }
 .black-key-12 {
   position: absolute;
