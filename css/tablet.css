@@ -1,0 +1,9 @@
+@media only screen and (max-width:1439px) and (min-width:600px){
+    .black-key a {
+        font-size: 2vw;
+    }
+    .white-key a {
+        font-size: 2vw;
+    }
+
+}
