@@ -15,13 +15,16 @@ body {
 
 .header {
   grid-area: header;
+  background-color: aliceblue;
+  width: 100vw;
+  height: 80px;
 }
 
 .main {
   grid-area: main;
   display: grid;
   grid-template-areas:
-    "piano"
+    "piano-container"
     "tables";
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
@@ -63,6 +66,7 @@ body {
   grid-template-areas:
     "black-table-heading black-table-heading"
     "black-table-1 black-table-2";
+
 }
 
 .black-table-heading {
@@ -107,13 +111,12 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 }
 
 .piano-container {
-  grid-area: piano;
+  grid-area: piano-container;
   display: grid;
   grid-template-areas: "piano";
   width: inherit;
   /* height: inherit; */
   place-items: center;
-  margin-top: 50px;
 }
 
 .piano-white-keys {
@@ -125,9 +128,6 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   width: 80vw;
   max-width: 1440px;
   height: 30vh;
-  /* border-top: 20px solid rgba(223, 223, 223, 0.238);
-  border-left: 10px solid brown;
-  border-right: 10px solid brown; */
 }
 
 .white-key {
@@ -198,7 +198,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 }
 
 .piano-black-keys {
-  position: absolute;
+  grid-area:piano;
+  position: relative;
   width: 80vw;
   max-width: 1440px;
   height: 30vh;
