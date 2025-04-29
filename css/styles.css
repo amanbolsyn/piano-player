@@ -4,11 +4,33 @@ body {
   height: 100vh;
 }
 
+.body-container {
+    display: grid;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+    grid-template-rows: 1fr 12fr 1fr;
+}
+
+.header {
+    grid-area: header;
+}
+
+.main {
+    grid-area:main;
+}
+
+.footer {
+    grid-area: footer;
+    width: 100vw;
+}
+
 .piano-container {
   display: grid;
   grid-template-areas: "piano";
   width: inherit;
-  height: inherit;
+  /* height: inherit; */
   place-items: center;
 }
 .piano-white-keys {
@@ -20,6 +42,9 @@ body {
   width: 80vw;
   max-width: 1440px;
   height: 30vh;
+  /* border-top: 20px solid rgba(223, 223, 223, 0.238);
+  border-left: 10px solid brown;
+  border-right: 10px solid brown; */
 }
 
 .white-key {
@@ -158,18 +183,22 @@ body {
   left: 92%;
 }
 
+.footer p {
+    text-align: center;
+}
+
 @media only screen and (min-width: 600px) {
-    .black-key:hover {
+    .black-key:hover, .active-black {
         background-color: rgb(106, 106, 106);
     }
 
-    .white-key:hover{
+    .white-key:hover, .active-white{
         background-color: rgb(238, 238, 238);
     }
 }
 
 @media only screen and (max-width:374px){
-    .piano-container {
+    .body-container {
         display:none;
     }
 }
