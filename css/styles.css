@@ -29,7 +29,6 @@ body {
 .logo {
   grid-area: logo;
 }
-
 .modes {
   grid-area: modes;
   margin:auto;
@@ -80,57 +79,64 @@ body {
   grid-area: tables-container;
   display: grid;
   grid-template-areas: "tables";
-  place-items: center;
+  place-items: start;
   width: inherit;
 }
 
 .tables {
   grid-area: tables;
   display: grid;
-  grid-template-areas: "white-table black-table";
+  grid-template-areas: "white-table-1 white-table-2  black-table-1 black-table-2";
   width: inherit;
   max-width: 1440px;
   margin: auto;
+  margin-bottom: 50px;
 }
 
-.white-keys-table {
-  grid-area: white-table;
-  display: grid;
-  grid-template-areas:
-    "white-table-heading white-table-heading"
-    "white-table-1 white-table-2";
-}
-.white-table-heading {
-  grid-area: white-table-heading;
-}
 .white-table-1 {
   grid-area: white-table-1;
-  margin-left: 20px;
+  display: grid;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px black;
+  margin:10px;
+  margin-left: 40px;
+  transform: rotate(-5deg);
 }
+
 .white-table-2 {
   grid-area: white-table-2;
-}
-
-.black-keys-table {
-  grid-area: black-table;
   display: grid;
-  grid-template-areas:
-    "black-table-heading black-table-heading"
-    "black-table-1 black-table-2";
+  padding: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px black;
+  width: 250px;
+  transform: rotate(5deg);
 }
 
-.black-table-heading {
-  grid-area: black-table-heading;
-}
 .black-table-1 {
   grid-area: black-table-1;
-}
-.black-table-2 {
-  grid-area: black-table-2;
-  margin-right: 20px;
+  display: grid;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px black;
+  transform: rotate(-10deg);
+  width: 350px;
 }
 
-h2 {
+
+.black-table-2 {
+  grid-area: black-table-2;
+  display: grid;
+  padding: 10px;
+  margin-right: 30px;
+  background-color: white;
+  box-shadow: 1px 1px 20px black;
+  transform: rotate(10deg);
+  width: 300px;
+}
+
+h3 {
   font-family: "Limelight";
   text-align: center;
 }
@@ -319,7 +325,7 @@ tr:nth-child(even) {
 .footer {
   grid-area: footer;
   width: inherit;
-  background-color: rgb(225, 223, 221);
+  /* background-color: rgb(225, 223, 221); */
 }
 
 .footer p {
