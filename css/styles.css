@@ -15,9 +15,48 @@ body {
 
 .header {
   grid-area: header;
-  background-color: aliceblue;
+  display: grid;
+  grid-template-areas: 
+  "logo modes mode-settings";
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 100vw;
   height: 80px;
+}
+
+.logo {
+  grid-area: logo;
+}
+.modes {
+  grid-area: modes;
+  margin:auto;
+}
+.mode-settings {
+  grid-area: mode-settings;
+}
+
+.header h1 {
+  display: inline-block;
+  font-family: "Limelight";
+  margin-left: 10px;
+}
+
+.header input {
+  display: none;
+}
+
+.header label {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
+
+.header input[type="radio"]:checked + label {
+  background-color: rgb(0, 232, 15);
+}
+
+.header input[type="radio"]:not(:checked) + label {
+  background-color: red;
 }
 
 .main {
@@ -39,7 +78,7 @@ body {
   grid-template-areas: "white-table black-table";
   width: inherit;
   max-width: 1440px;
-  margin:auto;
+  margin: auto;
   margin-bottom: 20px;
 }
 
@@ -55,6 +94,7 @@ body {
 }
 .white-table-1 {
   grid-area: white-table-1;
+  margin-left: 20px;
 }
 .white-table-2 {
   grid-area: white-table-2;
@@ -66,7 +106,6 @@ body {
   grid-template-areas:
     "black-table-heading black-table-heading"
     "black-table-1 black-table-2";
-
 }
 
 .black-table-heading {
@@ -77,6 +116,7 @@ body {
 }
 .black-table-2 {
   grid-area: black-table-2;
+  margin-right: 20px;
 }
 
 h2 {
@@ -85,7 +125,7 @@ h2 {
 }
 
 table {
-    margin: 10px;
+  margin: 10px;
 }
 
 table,
@@ -95,19 +135,15 @@ tr {
 }
 
 th {
-    background-color: aliceblue;
+  background-color: aliceblue;
 }
 
 td {
   text-align: center;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
-
-.footer {
-  grid-area: footer;
-  width: inherit;
-  background-color: rgb(225, 223, 221);
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .piano-container {
@@ -198,7 +234,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 }
 
 .piano-black-keys {
-  grid-area:piano;
+  grid-area: piano;
   position: relative;
   width: 80vw;
   max-width: 1440px;
@@ -266,32 +302,60 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   left: 92%;
 }
 
+.footer {
+  grid-area: footer;
+  width: inherit;
+  background-color: rgb(225, 223, 221);
+}
+
 .footer p {
   text-align: center;
 }
 
+.footer p a {
+  color: black;
+}
+
 @media only screen and (min-width: 600px) {
+
+  .header input[type="radio"]:checked+label:hover{
+     background-color: rgb(116, 255, 116);
+     cursor: pointer;
+  }
+
+  .header input[type="radio"]:not(:checked)+label:hover{
+    background-color: rgb(255, 77, 77);
+    cursor: pointer;
+ }
+
+
+  .black-key:hover {
+    cursor: pointer;
+    background-color: rgb(73, 115, 124);
+  }
+
   .black-key:active,
   .active-black {
     background-color: rgb(106, 106, 106);
   }
 
-  .black-key:hover {
+  .white-key:hover {
+    background-color: rgb(235, 244, 252);
     cursor: pointer;
   }
-
-  /* .white-key:hover {
-        background-color: rgb(235, 244, 252);
-        cursor: pointer;
-    } */
 
   .white-key:active,
   .active-white {
     background-color: rgb(238, 238, 238);
   }
 
-  .white-key:hover {
+  /* .white-key:hover {
     cursor: pointer;
+  } */
+
+  .footer p a:hover {
+    cursor: pointer;
+    text-decoration: none;
   }
 }
 

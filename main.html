@@ -12,6 +12,14 @@
       rel="stylesheet"
     />
 
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quintessential&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- STYLES -->
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/tablet.css" />
@@ -20,7 +28,18 @@
   </head>
   <body class="body-container">
     <header class="header">
-      <h1>Online Piano Player</h1>
+      <div class = "logo">
+        <h1>Online Piano Player</h1>
+      </div>
+      <div class = "modes">
+        <input type="radio" id="mode-1" name="piano-mode" value="interactive" checked/>
+        <label for="mode-1">Interactive Mode</label>
+        <input type="radio" id="mode-2" name="piano-mode" value="prepared" />
+        <label for="mode-2">Prepared Mode</label>
+      </div>
+      <div class = "mode-settings">
+
+      </div>
     </header>
     <main class="main">
       <div class="piano-container">
@@ -60,157 +79,162 @@
           <div class="black-key black-key-12"><a>D#</a></div>
         </div>
       </div>
-      <div class = "tables">
-      <div class="white-keys-table">
-        <h2 class="white-table-heading">Keyboard mapping to white keys</h2>
-        <table class="white-table-1">
-          <tr>
-            <th>key</th>
-            <th>note and it's octave</th>
-          </tr>
-          <tr>
-            <td>q</td>
-            <td>C3</td>
-          </tr>
-          <tr>
-            <td>w</td>
-            <td>D3</td>
-          </tr>
-          <tr>
-            <td>e</td>
-            <td>E3</td>
-          </tr>
-          <tr>
-            <td>r</td>
-            <td>F3</td>
-          </tr>
-          <tr>
-            <td>t</td>
-            <td>G3</td>
-          </tr>
-          <tr>
-            <td>y</td>
-            <td>A3</td>
-          </tr>
-          <tr>
-            <td>u</td>
-            <td>B3</td>
-          </tr>
-          <tr>
-            <td>i</td>
-            <td>C4</td>
-          </tr>
-          <tr>
-            <td>o</td>
-            <td>D4</td>
-          </tr>
-        </table>
-        <table class="white-table-2">
-          <tr>
-            <th>key</th>
-            <th>note and it's octave</th>
-          </tr>
-          <tr>
-            <td>p</td>
-            <td>E4</td>
-          </tr>
-          <tr>
-            <td>z</td>
-            <td>F4</td>
-          </tr>
-          <tr>
-            <td>x</td>
-            <td>G4</td>
-          </tr>
-          <tr>
-            <td>c</td>
-            <td>A4</td>
-          </tr>
-          <tr>
-            <td>v</td>
-            <td>B4</td>
-          </tr>
-          <tr>
-            <td>b</td>
-            <td>C5</td>
-          </tr>
-          <tr>
-            <td>n</td>
-            <td>D5</td>
-          </tr>
-          <tr>
-            <td>m</td>
-            <td>E5</td>
-          </tr>
-        </table>
+      <div class="tables">
+        <div class="white-keys-table">
+          <h2 class="white-table-heading">Keyboard mapping to white keys</h2>
+          <table class="white-table-1">
+            <tr>
+              <th>key</th>
+              <th>note and it's octave</th>
+            </tr>
+            <tr>
+              <td>q</td>
+              <td>C3</td>
+            </tr>
+            <tr>
+              <td>w</td>
+              <td>D3</td>
+            </tr>
+            <tr>
+              <td>e</td>
+              <td>E3</td>
+            </tr>
+            <tr>
+              <td>r</td>
+              <td>F3</td>
+            </tr>
+            <tr>
+              <td>t</td>
+              <td>G3</td>
+            </tr>
+            <tr>
+              <td>y</td>
+              <td>A3</td>
+            </tr>
+            <tr>
+              <td>u</td>
+              <td>B3</td>
+            </tr>
+            <tr>
+              <td>i</td>
+              <td>C4</td>
+            </tr>
+            <tr>
+              <td>o</td>
+              <td>D4</td>
+            </tr>
+          </table>
+          <table class="white-table-2">
+            <tr>
+              <th>key</th>
+              <th>note and it's octave</th>
+            </tr>
+            <tr>
+              <td>p</td>
+              <td>E4</td>
+            </tr>
+            <tr>
+              <td>z</td>
+              <td>F4</td>
+            </tr>
+            <tr>
+              <td>x</td>
+              <td>G4</td>
+            </tr>
+            <tr>
+              <td>c</td>
+              <td>A4</td>
+            </tr>
+            <tr>
+              <td>v</td>
+              <td>B4</td>
+            </tr>
+            <tr>
+              <td>b</td>
+              <td>C5</td>
+            </tr>
+            <tr>
+              <td>n</td>
+              <td>D5</td>
+            </tr>
+            <tr>
+              <td>m</td>
+              <td>E5</td>
+            </tr>
+          </table>
+        </div>
+        <div class="black-keys-table">
+          <h2 class="black-table-heading">Keyboard mapping to black keys</h2>
+          <table class="black-table-1">
+            <tr>
+              <th>key</th>
+              <th>note and it's octave</th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>C#3</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>D#3</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>F#3</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>G#3</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>A#3</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>C#4</td>
+            </tr>
+          </table>
+          <table class="black-table-2">
+            <tr>
+              <th>key</th>
+              <th>note and it's octave</th>
+            </tr>
+            <tr>
+              <td>0</td>
+              <td>D#4</td>
+            </tr>
+            <tr>
+              <td>s</td>
+              <td>F#4</td>
+            </tr>
+            <tr>
+              <td>d</td>
+              <td>G#4</td>
+            </tr>
+            <tr>
+              <td>f</td>
+              <td>A#4</td>
+            </tr>
+            <tr>
+              <td>h</td>
+              <td>C#5</td>
+            </tr>
+            <tr>
+              <td>j</td>
+              <td>D#5</td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <div class="black-keys-table">
-        <h2 class="black-table-heading">Keyboard mapping to black keys</h2>
-        <table class="black-table-1">
-          <tr>
-            <th>key</th>
-            <th>note and it's octave</th>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>C#3</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>D#3</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>F#3</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>G#3</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>A#3</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>C#4</td>
-          </tr>
-        </table>
-        <table class="black-table-2">
-          <tr>
-            <th>key</th>
-            <th>note and it's octave</th>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>D#4</td>
-          </tr>
-          <tr>
-            <td>s</td>
-            <td>F#4</td>
-          </tr>
-          <tr>
-            <td>d</td>
-            <td>G#4</td>
-          </tr>
-          <tr>
-            <td>f</td>
-            <td>A#4</td>
-          </tr>
-          <tr>
-            <td>h</td>
-            <td>C#5</td>
-          </tr>
-          <tr>
-            <td>j</td>
-            <td>D#5</td>
-          </tr>
-        </table>
-      </div>
-    </div>
     </main>
     <footer class="footer">
-      <p>Designed and developed by Aman Nurgozhiyev (Aman Bolsyn)</p>
+      <p>
+        All rights reserved &copy; 2025. Designed and developed by
+        <a href="https://github.com/amanbolsyn" target="_blank"
+          >Aman Nurgozhiyev (Aman Bolsyn)</a
+        >
+      </p>
     </footer>
     <script type="module" src="./js/main.js"></script>
   </body>
