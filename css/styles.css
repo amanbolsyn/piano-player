@@ -29,6 +29,7 @@ body {
 .logo {
   grid-area: logo;
 }
+
 .modes {
   grid-area: modes;
   margin:auto;
@@ -69,10 +70,9 @@ body {
   grid-template-areas:
     "piano-container"
     "tables";
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr;
   column-gap: 2em;
-  row-gap: 2em;
   width: inherit;
 }
 
@@ -83,7 +83,7 @@ body {
   width: inherit;
   max-width: 1440px;
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom:100px;
 }
 
 .white-keys-table {
@@ -155,7 +155,6 @@ tr:nth-child(even) {
   display: grid;
   grid-template-areas: "piano";
   width: inherit;
-  /* height: inherit; */
   place-items: center;
 }
 
