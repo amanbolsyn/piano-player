@@ -69,10 +69,18 @@ body {
   display: grid;
   grid-template-areas:
     "piano-container"
-    "tables";
-  grid-template-rows: 1fr;
+    "tables-container";
+  grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
   column-gap: 2em;
+  width: inherit;
+}
+
+.tables-container {
+  grid-area: tables-container;
+  display: grid;
+  grid-template-areas: "tables";
+  place-items: center;
   width: inherit;
 }
 
@@ -83,7 +91,6 @@ body {
   width: inherit;
   max-width: 1440px;
   margin: auto;
-  margin-bottom:100px;
 }
 
 .white-keys-table {
