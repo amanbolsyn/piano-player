@@ -20,8 +20,10 @@ body {
   "logo modes mode-settings";
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  width: 100vw;
+  width: inherit;
+  max-width: 1440px;
   height: 80px;
+  margin:auto;
 }
 
 .logo {
@@ -33,6 +35,7 @@ body {
 }
 .mode-settings {
   grid-area: mode-settings;
+  margin:auto;
 }
 
 .header h1 {
@@ -49,6 +52,7 @@ body {
   display: inline-block;
   padding: 10px;
   border-radius: 0.5rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .header input[type="radio"]:checked + label {
@@ -328,10 +332,9 @@ tr:nth-child(even) {
     cursor: pointer;
  }
 
-
   .black-key:hover {
     cursor: pointer;
-    background-color: rgb(73, 115, 124);
+    background-color: rgb(79, 126, 137);
   }
 
   .black-key:active,
