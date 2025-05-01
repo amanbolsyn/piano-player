@@ -56,11 +56,14 @@ document.addEventListener("keypress", function(pressedKey) {
      if(blackKeysMap.get(pressedKey.code)) {
        const blackKey = blackKeysContainer.querySelector(blackKeysMap.get(pressedKey.code));
        blackKey.classList.add("active-black")
+       console.log(blackKey)
+
     } 
 
     if(whiteKeysMap.get(pressedKey.code)){
         const whiteKey = whiteKeysContainer.querySelector(whiteKeysMap.get(pressedKey.code));
         whiteKey.classList.add("active-white")
+        console.log(whiteKey)
     }
 })
 

@@ -56,11 +56,12 @@ body {
 }
 
 .header input[type="radio"]:checked + label {
-  background-color: rgb(0, 232, 15);
+  background-color: rgb(54, 255, 67);
+  border: 1px solid rgb(54, 255, 67);
 }
 
 .header input[type="radio"]:not(:checked) + label {
-  background-color: red;
+  border: 1px solid rgb(191, 191, 191);
 }
 
 .main {
@@ -110,7 +111,7 @@ body {
   padding: 10px;
   background-color: white;
   box-shadow: 1px 1px 20px black;
-  width: 250px;
+  max-width:250px;
   transform: rotate(5deg);
 }
 
@@ -338,15 +339,16 @@ tr:nth-child(even) {
 
 @media only screen and (min-width: 600px) {
 
-  .header input[type="radio"]:checked+label:hover{
-     background-color: rgb(116, 255, 116);
-     cursor: pointer;
-  }
-
   .header input[type="radio"]:not(:checked)+label:hover{
-    background-color: rgb(255, 77, 77);
+    background-color: rgb(116, 255, 116);
     cursor: pointer;
+    border:1px solid rgb(116, 255, 116);
  }
+
+   .white-table-2:hover, .white-table-1:hover, .black-table-1:hover, .black-table-2:hover{
+    z-index: 1;
+    transform: scale(1.1);
+   }
 
   .black-key:hover {
     cursor: pointer;
@@ -362,6 +364,7 @@ tr:nth-child(even) {
 
   .white-key:hover {
      cursor: pointer;
+     /* background-color: #fafafa; */
   }
 
   .white-key:active,
