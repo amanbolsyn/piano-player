@@ -80,7 +80,6 @@ body {
   grid-area: tables-container;
   display: grid;
   grid-template-areas: "tables";
-  place-items: start;
   width: inherit;
 }
 
@@ -168,9 +167,18 @@ tr:nth-child(even) {
 .piano-container {
   grid-area: piano-container;
   display: grid;
-  grid-template-areas: "piano";
+  grid-template-areas: "piano-scroll";
   width: inherit;
-  place-items: center;
+}
+
+.piano-scroll {
+  grid-area: piano-scroll;
+  display: grid;
+  grid-template-areas: "piano";
+  width: 80vw;
+  max-width: 1440px;
+  height: 30vh;
+  margin:auto;
 }
 
 .piano-white-keys {
@@ -179,9 +187,7 @@ tr:nth-child(even) {
   grid-template-areas: "white-key-1 white-key-2 white-key-3 white-key-4 white-key-5 white-key-6 white-key-7 white-key-8 white-key-9 white-key-10 white-key-11 white-key-12 white-key-13 white-key-14 white-key-15 white-key-16 white-key-17";
   grid-template-rows: 1fr;
   grid-template-columns: repeat(17, 1fr);
-  width: 80vw;
-  max-width: 1440px;
-  height: 30vh;
+
 }
 
 .white-key {

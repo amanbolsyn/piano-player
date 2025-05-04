@@ -1,14 +1,44 @@
+@media only screen and (max-width: 599px) and (min-width: 375px) {
+  .header {
+    grid-template-areas: "logo modes";
+    grid-template-columns: 1fr 1fr;
+  }
 
-@media only screen and (max-width:599px) and (min-width:375px){
-    .black-key a{
-        font-size: 2vw;
-    }
+  .modes {
+    display:none;
+  }
 
-    .white-key a {
-        font-size: 2vw;
-    }
+  .mode-settings {
+    display: none;
+  }
 
-    .tables {
-        display: none;
-    }
+  .piano-container {
+   
+  }
+
+  .piano-scroll {
+    overflow-x: scroll;
+    width: 95%;
+    margin: 5px;
+  }
+
+  .piano-white-keys {
+    width: 1000px;
+  }
+
+  .piano-black-keys {
+    width: 1000px;
+  }
+
+  .black-key a {
+    font-size: 2vw;
+  }
+
+  .white-key a {
+    font-size: 2vw;
+  }
+
+  .tables {
+    grid-template-areas: "white-table-1 " "white-table-2" "black-table-1" "black-table-2";
+  }
 }
