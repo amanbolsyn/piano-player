@@ -1,8 +1,13 @@
 @media only screen and (max-width: 599px) and (min-width: 375px) {
+
   .header {
     grid-template-areas: "logo modes";
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 7fr 1fr;
   }
+  
+  .logo h1 {
+       font-size:25px;
+   }
 
   .modes {
     display:none;
@@ -13,13 +18,12 @@
   }
 
   .piano-container {
-   
-  }
+    margin-bottom: 50px;
+}
 
   .piano-scroll {
     overflow-x: scroll;
-    width: 95%;
-    margin: 5px;
+    width: 100%;
   }
 
   .piano-white-keys {
@@ -28,14 +32,6 @@
 
   .piano-black-keys {
     width: 1000px;
-  }
-
-  .black-key a {
-    font-size: 2vw;
-  }
-
-  .white-key a {
-    font-size: 2vw;
   }
 
   .tables {
