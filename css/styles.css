@@ -91,7 +91,7 @@ body {
   width: inherit;
   max-width: 1440px;
   margin: auto;
-  margin-bottom: 50px;
+  margin-top: 0px;
 }
 
 .white-table-1 {
@@ -352,6 +352,7 @@ tr:nth-child(even) {
 .footer {
   grid-area: footer;
   width: inherit;
+  margin-top: 50px;
   /* background-color: rgb(225, 223, 221); */
 }
 
