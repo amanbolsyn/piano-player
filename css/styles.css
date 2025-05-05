@@ -37,6 +37,10 @@ body {
   margin:auto;
 }
 
+.burger-menu {
+  display:none;
+}
+
 .header h1 {
   display: inline-block;
   font-family: "Limelight";
@@ -176,7 +180,6 @@ tr:nth-child(even) {
   grid-template-areas: "piano";
   width: 80vw;
   max-width: 1440px;
-  height: 30vh;
   min-height: 200px;
   margin:auto;
 }
@@ -259,6 +262,15 @@ tr:nth-child(even) {
   grid-area: white-key-17;
 }
 
+
+.white-key:active,
+.active-white {
+  background-color: rgb(240, 240, 240);
+  box-shadow: none;
+  transform: scaleY(103%);
+  transform-origin: top;
+}
+
 .piano-black-keys {
   grid-area: piano;
   position: relative;
@@ -330,6 +342,13 @@ tr:nth-child(even) {
   left: 92%;
 }
 
+.black-key:active,
+.active-black {
+  box-shadow: none;
+  transform: scaleY(104%);
+  transform-origin: top;
+}
+
 .footer {
   grid-area: footer;
   width: inherit;
@@ -343,6 +362,8 @@ tr:nth-child(even) {
 .footer p a {
   color: black;
 }
+
+
 
 @media only screen and (min-width: 600px) {
 
@@ -362,24 +383,10 @@ tr:nth-child(even) {
 
    }
 
-  .black-key:active,
-  .active-black {
-    box-shadow: none;
-    transform: scaleY(104%);
-    transform-origin: top;
-  }
 
   .white-key:hover {
      cursor: pointer;
      /* background-color: #fafafa; */
-  }
-
-  .white-key:active,
-  .active-white {
-    background-color: rgb(240, 240, 240);
-    box-shadow: none;
-    transform: scaleY(103%);
-    transform-origin: top;
   }
 
   .footer p a:hover {

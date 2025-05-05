@@ -1,7 +1,7 @@
 @media only screen and (max-width: 599px) and (min-width: 375px) {
 
   .header {
-    grid-template-areas: "logo modes";
+    grid-template-areas: "logo burger-menu";
     grid-template-columns: 7fr 1fr;
   }
   
@@ -17,6 +17,11 @@
     display: none;
   }
 
+  .burger-menu {
+    grid-area:burger-menu;
+    margin:auto;
+  }
+
   .piano-container {
     margin-bottom: 50px;
 }
@@ -24,6 +29,7 @@
   .piano-scroll {
     overflow-x: scroll;
     width: 100%;
+    padding-bottom: 20px;
   }
 
   .piano-white-keys {
@@ -36,5 +42,27 @@
 
   .tables {
     grid-template-areas: "white-table-1 " "white-table-2" "black-table-1" "black-table-2";
+  }
+
+  .white-table-1 {
+    margin:auto;
+    box-sizing: border-box;
+
+  }
+  .white-table-2 {
+    margin:auto;
+    box-sizing: border-box;
+
+  }
+
+  .black-table-1 {
+    margin:auto;
+    box-sizing: border-box;
+   }
+  .black-table-2 {
+    margin:auto;
+    box-sizing: border-box;
+
+
   }
 }
