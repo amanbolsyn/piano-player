@@ -1,26 +1,18 @@
-@media only screen and (max-width: 599px) and (min-width: 375px) {
+@media only screen and (max-width: 599px) and (min-width: 345px) {
+
+
+  body {
+    padding: 0rem;
+  }
 
   .header {
     grid-template-areas: "logo burger-menu";
     grid-template-columns: 7fr 1fr;
-  }
-  
-  .logo h1 {
-       font-size:25px;
-   }
-
-  .modes {
-    display:none;
-  }
-
-  .mode-settings {
-    display: none;
-  }
-
-  .burger-menu {
-    grid-area:burger-menu;
-    margin:auto;
-    display:block;
+    position: sticky;
+    background-color: white;
+    z-index: 3;
+    top: 0;
+    padding: 0rem 0.8rem;
   }
 
   .piano-container {
@@ -41,30 +33,8 @@
     width: 1000px;
   }
 
-  .tables {
-    grid-template-areas: "white-table-1 " "white-table-2" "black-table-1" "black-table-2";
+  footer p {
+      padding: 0rem, 0.8rem;
   }
 
-  .white-table-1 {
-    margin:auto;
-    box-sizing: border-box;
-
-  }
-  .white-table-2 {
-    margin:auto;
-    box-sizing: border-box;
-
-  }
-
-  .black-table-1 {
-    margin:auto;
-    box-sizing: border-box;
-   }
-
-  .black-table-2 {
-    margin:auto;
-    box-sizing: border-box;
-
-
-  }
 }
