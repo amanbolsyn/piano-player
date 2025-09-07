@@ -373,6 +373,11 @@ body {
   top: 50%;
 }
 
+#black-table-1 {
+  left: 60%;
+  top: 25%;
+}
+
 .table-container-clone {
   left: -1000px;
 }
