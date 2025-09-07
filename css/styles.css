@@ -8,7 +8,7 @@
   transition: opacity 0.3s transform 0.3s;
 }
 
-.table-container.hidden{
+.table-container.hidden {
   opacity: 0;
   transform: scale(0.5);
   transition: opacity 0.2s, transform 0.2s;
@@ -345,15 +345,110 @@ body {
   transform-origin: top;
 }
 
-.table-container {
+.table-container,
+.table-container-clone {
+  /* position/layout */
   position: absolute;
-  background-color: rgb(251, 251, 251);
-  border: 1.5px solid black;
   z-index: 2;
-  padding: 0.8em;
+
+  background-color: rgb(251, 251, 251);
+  border: 0.05rem solid black;
+  border-radius: 0.5rem;
+
+  /* animation */
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.2s, transform 0.2s;
+
+  font-size: 1.2em;
+
+}
+
+#white-table-1 {
+  left: 5%;
+}
+
+#white-table-2 {
+  left: 30%;
+  top: 50%;
+}
+
+.table-container-clone {
+  left: -1000px;
+}
+
+
+
+.table-heading {
+  height: 23px;
+  border-bottom: 0.05rem solid black;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+  background-color: #ebf0f1;
+  display: flex;
+  align-items: center;
+}
+
+.table-heading div {
+  width: 12px;
+  height: 55%;
+  border-radius: 50%;
+  margin: 3px;
+}
+
+.table-heading div:nth-of-type(1) {
+  background-color: red;
+  margin-left: 5px
+}
+
+.table-heading div:nth-of-type(1) svg {
+  display: none;
+  padding-top: 2px;
+  margin: auto;
+}
+
+
+.table-heading div:nth-of-type(2) {
+  background-color: rgb(253, 195, 49);
+}
+
+.table-heading div:nth-of-type(3) {
+  background-color: rgb(51, 243, 51);
+}
+
+.table-heading a {
+  font-size: 0.85em;
+  font-weight: 500;
+  margin-left: 20%;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+table {
+  width: 12vw;
+  min-width: 250px;
+  margin: 0.4em;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 0.05em solid black;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+td {
+  padding-left: 0.5em;
+  padding-top: 0.3em;
+  padding-bottom: 0.1em;
+  font-family: "Limelight";
+}
+
+
+td:nth-of-type(2) {
+  text-align: end;
+  padding-right: 0.5em;
+  width: 50%;
 }
 
 .footer {
@@ -372,6 +467,11 @@ body {
 
 @media only screen and (min-width: 600px) {
 
+
+  #logo:hover {
+    cursor: pointer;
+  }
+
   input[type="checkbox"]+label:hover svg {
     cursor: pointer;
   }
@@ -389,6 +489,10 @@ body {
     height: 34px;
     border-radius: 100%;
     background-color: rgb(216, 216, 216);
+  }
+
+  .table-heading div:nth-of-type(1):hover svg {
+    display: block;
   }
 
   .black-key:hover {

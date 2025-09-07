@@ -33,7 +33,6 @@ function NoteHints() {
 
   if (isShown === null) { // user first time visits the page
     noteHintsChkBox.checked = true;
-
   } else {  //user visited site before
 
     if (isShown === "true") {
@@ -41,6 +40,7 @@ function NoteHints() {
       ShowNoteHints(true)
     } else if (isShown === "false") {
       noteHintsChkBox.checked = false;
+      ShowNoteHints(false)
     }
 
   }
@@ -99,6 +99,82 @@ function NoteSheets() {
     ShowNoteSheets(isShown);
   })
 }
+
+
+function ApplyDragEvent() {
+
+  const sheetTables = document.querySelectorAll(".table-container>.table-heading");
+  const sheetTableClones = document.querySelectorAll(".table-container-clone")
+  const target = document.querySelector(".body-container")
+
+  sheetTables.forEach((table, idx) => {
+    table.addEventListener("dragstart", function (e) {
+
+      const parentId = e.target.parentNode.id;
+
+      const data = {
+        id: parentId,
+        offsetX: e.offsetX,
+        offsetY: e.offsetY,
+      }
+
+      document.getElementById(parentId).style.opacity = 0;
+      e.dataTransfer.setDragImage(sheetTableClones[idx], e.offsetX, e.offsetY)
+
+      e.dataTransfer.setData("application/my-app", JSON.stringify(data));
+      e.dataTransfer.effectAllowed = "move";
+
+
+    })
+  })
+
+  target.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  })
+
+  target.addEventListener("drop", function (e) {
+    e.preventDefault();
+    const rawData = e.dataTransfer.getData("application/my-app");
+    const data = JSON.parse(rawData);
+
+    document.getElementById(data.id).style.removeProperty("opacity")
+    document.getElementById(data.id).style.left = `${e.clientX - data.offsetX}px`;
+    document.getElementById(data.id).style.top = `${e.clientY - data.offsetY}px`;
+
+  })
+
+}
+
+
+function CloseWindow() {
+
+  const closeWindowBttns = document.querySelectorAll(".close-button");
+
+  closeWindowBttns.forEach((closeBttn) => {
+    closeBttn.addEventListener("click", function (e) {
+      const table = document.getElementById(e.target.closest("div[id]").id);
+      table.classList.add("hidden");
+
+      //update "show note sheets" checkbox
+      const hiddenTables = document.querySelectorAll(".table-container.hidden");
+      const allTables = document.querySelectorAll(".table-container");
+
+      if (hiddenTables.length === allTables.length) {
+        const sheetsChkBx = document.getElementById("note-sheets");
+        sheetsChkBx.checked = false;
+
+        const tooltipText = document.querySelectorAll(".tooltip-text")[1];
+        tooltipText.innerText = "show sheets"
+
+        localStorage.setItem("show-note-sheets", false)
+
+      }
+    })
+  })
+
+}
+
 
 function KeyListeners() {
 
@@ -206,4 +282,4 @@ function playNote() {
   oscillator.start(0);
 }
 
-export { KeyListeners, NoteHints, NoteSheets };
+export { KeyListeners, NoteHints, NoteSheets, ApplyDragEvent, CloseWindow };

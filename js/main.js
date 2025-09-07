@@ -1,6 +1,8 @@
 import {KeyListeners} from "./utils.js"
 import { NoteHints} from "./utils.js";
 import { NoteSheets } from "./utils.js";
+import { ApplyDragEvent } from "./utils.js";
+import { CloseWindow } from "./utils.js";
 
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -11,4 +13,9 @@ document.addEventListener("DOMContentLoaded", function(){
     NoteHints();
 
     NoteSheets();
+
+    ApplyDragEvent();
+
+    CloseWindow();
+
 });
