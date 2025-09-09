@@ -58,7 +58,7 @@ function NoteHints() {
 
 function ShowNoteSheets(isShown) {
 
-  const noteSheets = document.querySelectorAll(".table-container");
+  const noteSheets = document.querySelectorAll(".sheet-table");
   const tooltipText = document.querySelectorAll(".tooltip-text")[1];
 
   if (isShown) {
@@ -103,8 +103,8 @@ function NoteSheets() {
 
 function ApplyDragEvent() {
 
-  const sheetTables = document.querySelectorAll(".table-container>.table-heading");
-  const sheetTableClones = document.querySelectorAll(".table-container-clone")
+  const sheetTables = document.querySelectorAll(".window-container>.window-heading");
+  const sheetTableClones = document.querySelectorAll(".window-container-clone")
   const target = document.querySelector(".body-container")
 
   sheetTables.forEach((table, idx) => {
@@ -147,9 +147,9 @@ function ApplyDragEvent() {
 }
 
 
-function CloseWindow() {
+function CloseSheetWindow() {
 
-  const closeWindowBttns = document.querySelectorAll(".close-button");
+  const closeWindowBttns = document.querySelectorAll(".sheet-table .close-button");
 
   closeWindowBttns.forEach((closeBttn) => {
     closeBttn.addEventListener("click", function (e) {
@@ -157,8 +157,8 @@ function CloseWindow() {
       table.classList.add("hidden");
 
       //update "show note sheets" checkbox
-      const hiddenTables = document.querySelectorAll(".table-container.hidden");
-      const allTables = document.querySelectorAll(".table-container");
+      const hiddenTables = document.querySelectorAll(".sheet-table.hidden");
+      const allTables = document.querySelectorAll(".sheet-table");
 
       if (hiddenTables.length === allTables.length) {
         const sheetsChkBx = document.getElementById("note-sheets");
@@ -174,6 +174,43 @@ function CloseWindow() {
   })
 
 }
+
+function ShowInformationWindow() {
+
+  const informationChkBox = document.getElementById("information");
+  const informationWindow = document.getElementById("information-window");
+  let isShown = localStorage.getItem("show-information");
+
+
+  if (isShown === "true") {
+    informationChkBox.checked = true;
+    informationWindow.classList.remove("hidden")
+  }
+
+  informationChkBox.addEventListener("change", function () {
+    isShown = informationChkBox.checked;
+    localStorage.setItem("show-information", isShown);
+
+    if (isShown) {
+      informationWindow.classList.remove("hidden")
+    } else if (!isShown) {
+      informationWindow.classList.add("hidden")
+    }
+  })
+
+}
+
+function CloseInformationWindow() {
+  const infoCloseBttn = document.querySelector(".close-button.information");
+  const informationWindow = document.getElementById("information-window")
+  const informationChkBx = document.getElementById("information")
+
+  infoCloseBttn.addEventListener("click", function () {
+    informationWindow.classList.add("hidden");
+    informationChkBx.checked = false;
+  })
+}
+
 
 
 function KeyListeners() {
@@ -282,4 +319,4 @@ function playNote() {
   oscillator.start(0);
 }
 
-export { KeyListeners, NoteHints, NoteSheets, ApplyDragEvent, CloseWindow };
+export { KeyListeners, NoteHints, NoteSheets, ApplyDragEvent, CloseSheetWindow, ShowInformationWindow, CloseInformationWindow };

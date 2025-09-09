@@ -8,7 +8,7 @@
   transition: opacity 0.3s transform 0.3s;
 }
 
-.table-container.hidden {
+.window-container.hidden {
   opacity: 0;
   transform: scale(0.5);
   transition: opacity 0.2s, transform 0.2s;
@@ -37,8 +37,9 @@
 
 .tooltip .tooltip-text {
   top: 120%;
-  left: -45%;
+  left: 45%;
 }
+
 
 .tooltip .tooltip-text::after {
   content: "";
@@ -49,6 +50,11 @@
   border-right: 0.5rem solid transparent;
   border-left: 0.5rem solid transparent;
   border-bottom: 0.6rem solid rgb(216, 216, 216);
+}
+
+
+.tooltip:nth-of-type(3) .tooltip-text{
+  left: -50%;
 }
 
 body {
@@ -69,7 +75,7 @@ body {
 .header {
   grid-area: header;
   display: grid;
-  grid-template-areas: "logo";
+  grid-template-areas: "logo settings";
   grid-template-rows: 1fr;
   grid-template-columns: auto;
   width: inherit;
@@ -82,28 +88,35 @@ body {
 }
 
 #logo h1 {
-  display: inline-block;
+  /* display: inline-block; */
   font-family: "Limelight";
   font-size: clamp(1.5rem, 2.2vw, 4rem);
 }
 
+.settings {
+  grid-area: settings;
+}
+
+
 #note-hints,
-#note-sheets {
+#note-sheets, #information{
   display: none;
 }
 
 #note-hints+label,
-#note-sheets+label {
+#note-sheets+label,
+#information+label {
   position: relative;
-  top: 7.5px;
+  top: 18px;
   left: 20px;
-}
-
-#note-hints:checked+label,
-#note-sheets:checked+label {
   display: inline-block;
   width: 34px;
   height: 34px;
+}
+
+#note-hints:checked+label,
+#note-sheets:checked+label,
+#information:checked+label {
   border-radius: 100%;
   background-color: rgb(216, 216, 216);
 }
@@ -114,6 +127,10 @@ body {
 
 #note-sheets+label {
   padding: 0.3em 0.35em;
+}
+
+#information+label{
+  padding: 0.3em 0em 0.3em 0.6em;
 }
 
 .main {
@@ -345,11 +362,13 @@ body {
   transform-origin: top;
 }
 
-.table-container,
-.table-container-clone {
+.window-container,
+.window-container-clone {
   /* position/layout */
   position: absolute;
   z-index: 2;
+  min-width:250px;
+  max-width: 400px;
 
   background-color: rgb(251, 251, 251);
   border: 0.05rem solid black;
@@ -357,11 +376,10 @@ body {
 
   /* animation */
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1); 
   transition: opacity 0.2s, transform 0.2s;
 
   font-size: 1.2em;
-
 }
 
 #white-table-1 {
@@ -378,14 +396,12 @@ body {
   top: 25%;
 }
 
-.table-container-clone {
+.window-container-clone {
   left: -1000px;
 }
 
-
-
-.table-heading {
-  height: 23px;
+.window-heading {
+  height: 25px;
   border-bottom: 0.05rem solid black;
   border-radius: 0.5rem 0.5rem 0rem 0rem;
   background-color: #ebf0f1;
@@ -393,37 +409,43 @@ body {
   align-items: center;
 }
 
-.table-heading div {
-  width: 12px;
-  height: 55%;
+.window-heading div {
+  width: 15px;
+  height: 50%;
   border-radius: 50%;
   margin: 3px;
 }
 
-.table-heading div:nth-of-type(1) {
+.window-heading div:nth-of-type(1) {
   background-color: red;
   margin-left: 5px
 }
 
-.table-heading div:nth-of-type(1) svg {
+.window-heading div:nth-of-type(1) svg {
   display: none;
-  padding-top: 2px;
+  padding-top: 2.2px;
   margin: auto;
 }
 
 
-.table-heading div:nth-of-type(2) {
+.window-heading div:nth-of-type(2) {
   background-color: rgb(253, 195, 49);
 }
 
-.table-heading div:nth-of-type(3) {
+.window-heading div:nth-of-type(3) {
   background-color: rgb(51, 243, 51);
 }
 
-.table-heading a {
+.window-heading div:nth-of-type(4){
+  display: block;
+  width: 100%;
+  height: 100%;
+ }
+
+.window-heading a {
   font-size: 0.85em;
   font-weight: 500;
-  margin-left: 20%;
+  margin-left: 30%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
@@ -454,6 +476,21 @@ td:nth-of-type(2) {
   text-align: end;
   padding-right: 0.5em;
   width: 50%;
+}
+
+
+#information-window {
+  top: 30%;
+  left: 20%;
+}
+
+.information-section {
+  margin: 10px;
+}
+
+.information-section h2 {
+  font-family: "Limelight";
+  margin: 0px;
 }
 
 .footer {
@@ -488,15 +525,14 @@ td:nth-of-type(2) {
   }
 
   #note-hints:hover+label,
-  #note-sheets:hover+label {
+  #note-sheets:hover+label,
+  #information:hover+label {
     display: inline-block;
-    width: 34px;
-    height: 34px;
     border-radius: 100%;
     background-color: rgb(216, 216, 216);
   }
 
-  .table-heading div:nth-of-type(1):hover svg {
+  .window-heading div:nth-of-type(1):hover svg {
     display: block;
   }
 
