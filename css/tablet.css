@@ -25,13 +25,7 @@
     }
 
 
-    .black-key a {
-        color: rgb(221, 221, 221);
+    .black-key a, .white-key a {
         font-size: 1em;
-        position: absolute;
-        left: 10%;
-        opacity: 1;
-        transform: scale(1);
-        transition: opacity 0.5s, transform 0.5s;
     }
 }
