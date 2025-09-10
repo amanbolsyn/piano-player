@@ -217,6 +217,8 @@ function ShowPianoMode(isChecked) {
   const interactiveSections = document.querySelectorAll(".interactive-section");
   const preparedSections = document.querySelectorAll(".prepared-section")
   const pianoWindowHeading = document.getElementById("piano-window-heading");
+  const pianoWindowHeadingCln = document.getElementById("piano-window-heading-clone");
+
 
   if (!isChecked) {//interactive section
 
@@ -226,7 +228,7 @@ function ShowPianoMode(isChecked) {
     }
 
     pianoWindowHeading.innerText = "interactive mode"
-
+    pianoWindowHeadingCln.innerText = "interactive mode"
 
   } else if (isChecked) {//prepared section
 
@@ -236,6 +238,7 @@ function ShowPianoMode(isChecked) {
     }
 
     pianoWindowHeading.innerText = "prepared mode"
+    pianoWindowHeadingCln.innerText = "prepared mode"
 
   }
 }

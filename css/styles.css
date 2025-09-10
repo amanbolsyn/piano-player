@@ -515,7 +515,7 @@ td:nth-of-type(2) {
 
 
 #information-window {
-  top: 30%;
+  top: 20%;
   left: 20%;
 }
 
@@ -553,8 +553,8 @@ td:nth-of-type(2) {
 /* PIANO MODE STYLING */
 
 #piano-mode-window {
-  top: 70%;
-  left: 30%;
+  top: 62%;
+  left: 29%;
 }
 
 .interactive-section {
@@ -599,7 +599,7 @@ td:nth-of-type(2) {
   #note-hints:hover+label,
   #note-sheets:hover+label,
   #information:hover+label,
-  #interactive-mode:hover+label,
+  #interactive-mode+label,
   #prepared-mode:hover+label {
     display: inline-block;
     border-radius: 100%;

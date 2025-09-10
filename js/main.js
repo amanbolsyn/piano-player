@@ -10,7 +10,8 @@ import { PianoModeToggle } from "./utils.js";
 const closeWindowBttns = document.querySelectorAll(".sheet-table .close-button");
 const infoCloseBttn = document.querySelector(".close-button.information");
 const sheetTables = document.querySelectorAll(".window-container.sheet-table");
-const windowHeadings = document.querySelector(".window-container>.window-heading")
+const windowContainers = document.querySelectorAll(".window-container")
+const pianoModeWindow = document.getElementById("piano-mode-window")
 
 
 
@@ -25,9 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     PianoModeToggle();
 
-    ApplyDragEvent();
-
-
     //note sheets window logic
     NoteSheets();
     closeWindowBttns.forEach((closeBttn) => {
@@ -38,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     //adding drag event to windows
+    ApplyDragEvent();
 
     //information window logic
     ShowInformationWindow();
@@ -45,15 +44,25 @@ document.addEventListener("DOMContentLoaded", function () {
         CloseInformationWindow();
     })
 
-
-    // close all windows when resizing
     window.addEventListener("resize", function () {
 
+
+        // close all windows when resizing
         for (const sheetTable of sheetTables) {
             CloseSheetWindow(sheetTable.id);
         }
 
         CloseInformationWindow();
+
+        //remove all inline styles of window containers if screen width is lesss then 600 pixels
+        if (this.innerWidth < 600) {
+            for (const windowContainer of windowContainers) {
+                windowContainer.removeAttribute("style");
+            }
+        }
+
+        //remove all inline styles of piano mode window every time when screen resizes
+        pianoModeWindow.removeAttribute("style");
     })
 });
 

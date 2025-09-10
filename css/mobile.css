@@ -52,7 +52,7 @@
     width: 100%;
     padding-bottom: 20px;
     position: absolute;
-    top: 200px;
+    top: 20vh;
   }
 
   .piano-white-keys {
@@ -69,8 +69,9 @@
     display: none;
   }
 
-  .window-container{
+  .window-container {
     max-width: 600px;
+    min-height: 300px;
     width: 100%;
   }
 
@@ -88,8 +89,64 @@
   }
 
 
-  footer  {
-    display:none;
+  footer {
+    display: none;
+  }
+
+}
+
+@media screen and (orientation: landscape) {
+
+  .header {
+    background-color: white;
+    box-shadow: none;
+  }
+  .tooltip-text {
+    display: none;
+  }
+
+  #note-sheets+label {
+    display: none;
+  }
+
+  .piano-container {
+    margin: 0px;
+  }
+  .piano-scroll {
+    width: 100vw;
+    margin: 10px 0px;
+  }
+
+  .piano-black-keys {
+    width: 100vw;
+  }
+
+  #piano-mode-window {
+    display: none;
+  }
+
+  #black-table-1,
+  #white-table-1,
+  #white-table-2 {
+    display: none;
+  }
+
+  #information-window {
+    left: auto;
+    top: auto;
+    bottom: 0%;
+    z-index: 4;
+  }
+
+  #piano-mode-window {
+    top: auto;
+    left: auto;
+    bottom: 0%;
+  }
+
+
+  footer {
+    display: none;
   }
 
 }
