@@ -20,6 +20,7 @@
 }
 
 .tooltip-text {
+  top: 120%;
   position: absolute;
   visibility: hidden;
   opacity: 0;
@@ -35,12 +36,6 @@
   background-color: rgb(216, 216, 216);
 }
 
-.tooltip .tooltip-text {
-  top: 120%;
-  left: 45%;
-}
-
-
 .tooltip .tooltip-text::after {
   content: "";
   display: inline-block;
@@ -52,13 +47,33 @@
   border-bottom: 0.6rem solid rgb(216, 216, 216);
 }
 
+/*  tooltip text positions from 1 to 5 */
+.tooltip:nth-of-type(1) .tooltip-text {
+  left: 45%;
+}
 
-.tooltip:nth-of-type(3) .tooltip-text{
+/* third tooltip text position */
+.tooltip:nth-of-type(2) .tooltip-text {
   left: -50%;
 }
 
+/* third tooltip text position */
+.tooltip:nth-of-type(3) .tooltip-text {
+  left: -50%;
+}
+
+/* third tooltip text position */
+.tooltip:nth-of-type(4) .tooltip-text {
+  left: -77%;
+}
+
+.tooltip:nth-of-type(5) .tooltip-text {
+  left: -63%;
+}
+
+
 body {
-  margin: 0em 0.8em;
+  margin: 0px;
   height: 100vh;
 }
 
@@ -77,9 +92,12 @@ body {
   display: grid;
   grid-template-areas: "logo settings";
   grid-template-rows: 1fr;
-  grid-template-columns: auto;
-  width: inherit;
+
+  width: 100vw;
+  height: 80px;
   margin: auto;
+  background-color: #ebf0f1;
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 
@@ -88,9 +106,8 @@ body {
 }
 
 #logo h1 {
-  /* display: inline-block; */
   font-family: "Limelight";
-  font-size: clamp(1.5rem, 2.2vw, 4rem);
+  text-align: end ;
 }
 
 .settings {
@@ -99,13 +116,14 @@ body {
 
 
 #note-hints,
-#note-sheets, #information{
+#note-sheets,
+#information,
+#interactive-mode,
+#prepared-mode {
   display: none;
 }
 
-#note-hints+label,
-#note-sheets+label,
-#information+label {
+header label {
   position: relative;
   top: 18px;
   left: 20px;
@@ -116,7 +134,9 @@ body {
 
 #note-hints:checked+label,
 #note-sheets:checked+label,
-#information:checked+label {
+#information:checked+label,
+#interactive-mode:checked+label,
+#prepared-mode:checked+label {
   border-radius: 100%;
   background-color: rgb(216, 216, 216);
 }
@@ -129,8 +149,19 @@ body {
   padding: 0.3em 0.35em;
 }
 
-#information+label{
+#information+label {
   padding: 0.3em 0em 0.3em 0.6em;
+}
+
+#interactive-mode+label {
+  top: 14px;
+  margin-left: 20px;
+  padding: 0.3em 0.15em 0.3em 0.45em;
+}
+
+#prepared-mode+label {
+  top: 15px;
+  padding: 0.4em 0.25em 0.25em 0.55em;
 }
 
 .main {
@@ -366,8 +397,8 @@ body {
 .window-container-clone {
   /* position/layout */
   position: absolute;
-  z-index: 2;
-  min-width:250px;
+  z-index: 3;
+  min-width: 250px;
   max-width: 400px;
 
   background-color: rgb(251, 251, 251);
@@ -376,24 +407,25 @@ body {
 
   /* animation */
   opacity: 1;
-  transform: scale(1); 
+  transform: scale(1);
   transition: opacity 0.2s, transform 0.2s;
 
   font-size: 1.2em;
 }
 
 #white-table-1 {
-  left: 5%;
+  left: 10%;
+  top: 10%;
 }
 
 #white-table-2 {
-  left: 30%;
-  top: 50%;
+  left: 40%;
+  top: 30%;
 }
 
 #black-table-1 {
   left: 60%;
-  top: 25%;
+  top: 24%;
 }
 
 .window-container-clone {
@@ -436,11 +468,11 @@ body {
   background-color: rgb(51, 243, 51);
 }
 
-.window-heading div:nth-of-type(4){
+.window-heading div:nth-of-type(4) {
   display: block;
   width: 100%;
   height: 100%;
- }
+}
 
 .window-heading a {
   font-size: 0.85em;
@@ -485,12 +517,49 @@ td:nth-of-type(2) {
 }
 
 .information-section {
-  margin: 10px;
+  padding: 10px;
+  padding-bottom: 20px;
+  font-family: "Caveat Brush", cursive;
+  background-image: url("/assets/information-baackground.jpg");
+  background-position: right 10%;
 }
 
 .information-section h2 {
-  font-family: "Limelight";
   margin: 0px;
+}
+
+.information-section h2+p {
+  font-size: 1.2em;
+  margin-top: 0.3em;
+}
+
+.information-section ol {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.information-section li {
+  font-size: 1.2em;
+}
+
+.information-section li>p {
+  margin-top: 0.3em;
+  font-size: 1em;
+}
+
+/* PIANO MODE STYLING */
+
+#piano-mode-window {
+  top: 70%;
+  left: 30%;
+}
+
+.interactive-section {
+  padding: 10px;
+}
+
+.prepared-section {
+  padding: 10px;
 }
 
 .footer {
@@ -514,7 +583,7 @@ td:nth-of-type(2) {
     cursor: pointer;
   }
 
-  input[type="checkbox"]+label:hover svg {
+  header label:hover {
     cursor: pointer;
   }
 
@@ -526,7 +595,9 @@ td:nth-of-type(2) {
 
   #note-hints:hover+label,
   #note-sheets:hover+label,
-  #information:hover+label {
+  #information:hover+label,
+  #interactive-mode:hover+label,
+  #prepared-mode:hover+label {
     display: inline-block;
     border-radius: 100%;
     background-color: rgb(216, 216, 216);

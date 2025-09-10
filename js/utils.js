@@ -103,12 +103,13 @@ function NoteSheets() {
 
 function ApplyDragEvent() {
 
-  const sheetTables = document.querySelectorAll(".window-container>.window-heading");
-  const sheetTableClones = document.querySelectorAll(".window-container-clone")
+  let zLevel = 4;
+  const windowHeadings = document.querySelectorAll(".window-container>.window-heading");
+  const windowClones = document.querySelectorAll(".window-container-clone")
   const target = document.querySelector(".body-container")
 
-  sheetTables.forEach((table, idx) => {
-    table.addEventListener("dragstart", function (e) {
+  windowHeadings.forEach((windowHead, idx) => {
+    windowHead.addEventListener("dragstart", function (e) {
 
       const parentId = e.target.parentNode.id;
 
@@ -118,8 +119,13 @@ function ApplyDragEvent() {
         offsetY: e.offsetY,
       }
 
-      document.getElementById(parentId).style.opacity = 0;
-      e.dataTransfer.setDragImage(sheetTableClones[idx], e.offsetX, e.offsetY)
+      const selectedWindow = document.getElementById(parentId);
+      selectedWindow.style.opacity = 0;
+
+      selectedWindow.style.zIndex = zLevel;
+      zLevel++;
+
+      e.dataTransfer.setDragImage(windowClones[idx], e.offsetX, e.offsetY)
 
       e.dataTransfer.setData("application/my-app", JSON.stringify(data));
       e.dataTransfer.effectAllowed = "move";
@@ -138,6 +144,7 @@ function ApplyDragEvent() {
     const rawData = e.dataTransfer.getData("application/my-app");
     const data = JSON.parse(rawData);
 
+
     document.getElementById(data.id).style.removeProperty("opacity")
     document.getElementById(data.id).style.left = `${e.clientX - data.offsetX}px`;
     document.getElementById(data.id).style.top = `${e.clientY - data.offsetY}px`;
@@ -147,31 +154,25 @@ function ApplyDragEvent() {
 }
 
 
-function CloseSheetWindow() {
+function CloseSheetWindow(id) {
 
-  const closeWindowBttns = document.querySelectorAll(".sheet-table .close-button");
+  const table = document.getElementById(id);
+  table.classList.add("hidden");
 
-  closeWindowBttns.forEach((closeBttn) => {
-    closeBttn.addEventListener("click", function (e) {
-      const table = document.getElementById(e.target.closest("div[id]").id);
-      table.classList.add("hidden");
+  //update "show note sheets" checkbox
+  const hiddenTables = document.querySelectorAll(".sheet-table.hidden");
+  const allTables = document.querySelectorAll(".sheet-table");
 
-      //update "show note sheets" checkbox
-      const hiddenTables = document.querySelectorAll(".sheet-table.hidden");
-      const allTables = document.querySelectorAll(".sheet-table");
+  if (hiddenTables.length === allTables.length) {
+    const sheetsChkBx = document.getElementById("note-sheets");
+    sheetsChkBx.checked = false;
 
-      if (hiddenTables.length === allTables.length) {
-        const sheetsChkBx = document.getElementById("note-sheets");
-        sheetsChkBx.checked = false;
+    const tooltipText = document.querySelectorAll(".tooltip-text")[1];
+    tooltipText.innerText = "show sheets"
 
-        const tooltipText = document.querySelectorAll(".tooltip-text")[1];
-        tooltipText.innerText = "show sheets"
+    localStorage.setItem("show-note-sheets", false)
 
-        localStorage.setItem("show-note-sheets", false)
-
-      }
-    })
-  })
+  }
 
 }
 
@@ -201,14 +202,69 @@ function ShowInformationWindow() {
 }
 
 function CloseInformationWindow() {
-  const infoCloseBttn = document.querySelector(".close-button.information");
+
   const informationWindow = document.getElementById("information-window")
   const informationChkBx = document.getElementById("information")
 
-  infoCloseBttn.addEventListener("click", function () {
-    informationWindow.classList.add("hidden");
-    informationChkBx.checked = false;
+  informationWindow.classList.add("hidden");
+  informationChkBx.checked = false;
+  localStorage.setItem("show-information", false)
+
+}
+
+function ShowPianoMode(isChecked) {
+
+  const interactiveSections = document.querySelectorAll(".interactive-section");
+  const preparedSections = document.querySelectorAll(".prepared-section")
+  const pianoWindowHeading = document.getElementById("piano-window-heading");
+
+  if (!isChecked) {//interactive section
+
+    for (let i = 0; i < interactiveSections.length; i++) {
+      interactiveSections[i].style.display = "block"
+      preparedSections[i].style.display = "none"
+    }
+
+    pianoWindowHeading.innerText = "interactive mode"
+
+
+  } else if (isChecked) {//prepared section
+
+    for (let i = 0; i < interactiveSections.length; i++) {
+      interactiveSections[i].style.display = "none"
+      preparedSections[i].style.display = "block"
+    }
+
+    pianoWindowHeading.innerText = "prepared mode"
+
+  }
+}
+
+
+function PianoModeToggle() {
+
+  const interactive = document.getElementById("interactive-mode");
+  const prepared = document.getElementById("prepared-mode");
+  let selectedMode = localStorage.getItem("piano-mode")
+
+  if (selectedMode === null || selectedMode === "interactive") { //interactive mode 
+    ShowPianoMode(false)
+    interactive.checked = true;
+  } else if (selectedMode === "prepared") { //prepared mode
+    ShowPianoMode(true)
+    prepared.checked = true;
+  }
+
+  interactive.addEventListener("change", function () {
+    localStorage.setItem("piano-mode", "interactive");
+    ShowPianoMode(false);
   })
+
+  prepared.addEventListener("change", function () {
+    localStorage.setItem("piano-mode", "prepared");
+    ShowPianoMode(true);
+  })
+
 }
 
 
@@ -277,7 +333,6 @@ function KeyListeners() {
     } else if (whiteKeysMap.get(pressedKey.code)) {
       const whiteKey = whiteKeysContainer.querySelector(whiteKeysMap.get(pressedKey.code));
       whiteKey.classList.add("active-white")
-      playNote();
     }
   })
 
@@ -319,4 +374,4 @@ function playNote() {
   oscillator.start(0);
 }
 
-export { KeyListeners, NoteHints, NoteSheets, ApplyDragEvent, CloseSheetWindow, ShowInformationWindow, CloseInformationWindow };
+export { KeyListeners, NoteHints, NoteSheets, ApplyDragEvent, CloseSheetWindow, ShowInformationWindow, CloseInformationWindow, PianoModeToggle };
