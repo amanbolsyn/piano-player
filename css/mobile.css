@@ -1,9 +1,7 @@
 @media only screen and (max-width: 599px) and (min-width: 345px) {
 
 
-  body {
-
-  }
+  body {}
 
   .header {
     display: grid;
@@ -32,6 +30,10 @@
     display: none;
   }
 
+  #note-sheets+label {
+    display: none;
+  }
+
   #interactive-mode+label {
     margin-left: 0px;
     top: 20px;
@@ -42,13 +44,15 @@
   }
 
   .piano-container {
-    margin-bottom: 50px;
+    margin-top: 0px;
   }
 
   .piano-scroll {
     overflow-x: scroll;
     width: 100%;
     padding-bottom: 20px;
+    position: absolute;
+    top: 200px;
   }
 
   .piano-white-keys {
@@ -59,25 +63,33 @@
     width: 1000px;
   }
 
-
-  #black-table-1 {
-    left: 0%;
-    top: 20%;
-  }
-
-  #white-table-1 {
-    left: 0%;
-    top: 20%;
-  }
-
+  #black-table-1,
+  #white-table-1,
   #white-table-2 {
-    left: 0%;
-    top: 20%;
+    display: none;
+  }
+
+  .window-container{
+    max-width: 600px;
+    width: 100%;
+  }
+
+  #information-window {
+    left: auto;
+    top: auto;
+    bottom: 0%;
+    z-index: 4;
+  }
+
+  #piano-mode-window {
+    top: auto;
+    left: auto;
+    bottom: 0%;
   }
 
 
-  footer p {
-    padding: 0rem, 0.8rem;
+  footer  {
+    display:none;
   }
 
 }
