@@ -312,6 +312,7 @@ header label {
   background-color: rgb(31, 29, 29);
   border-radius: 0rem 0rem 0.3rem 0.3rem;
   width: 4%;
+  min-width: min-content;
   height: 60%;
   z-index: 2;
   box-shadow: 0px 7px 3px rgb(135, 135, 135);
@@ -554,7 +555,7 @@ td:nth-of-type(2) {
 
 #piano-mode-window {
   top: 62%;
-  left: 29%;
+  left: 35vw;
 }
 
 .interactive-section {
@@ -579,8 +580,7 @@ td:nth-of-type(2) {
   color: black;
 }
 
-@media only screen and (min-width: 600px) {
-
+@media only screen and (min-width: 600px) and (min-height: 400px) {
 
   #logo:hover {
     cursor: pointer;
@@ -599,8 +599,8 @@ td:nth-of-type(2) {
   #note-hints:hover+label,
   #note-sheets:hover+label,
   #information:hover+label,
-  #interactive-mode+label,
-  #prepared-mode:hover+label {
+  #interactive-mode:hover+label,
+  #prepared-mode:hover:hover+label {
     display: inline-block;
     border-radius: 100%;
     background-color: rgb(216, 216, 216);

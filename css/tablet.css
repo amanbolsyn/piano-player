@@ -1,9 +1,37 @@
-@media only screen and (max-width:1439px) and (min-width:600px){
+@media only screen and (max-width:1439px) and (min-width:1000px) {
     .black-key a {
         font-size: 2vw;
     }
+
     .white-key a {
         font-size: 2vw;
     }
 
+    #piano-mode-window {
+        top: 420px;
+        left: 35vw;
+    }
+}
+
+
+@media only screen and (max-width:1000px) and (min-width:650px) {
+
+    .piano-scroll {
+        width: 100vw;
+    }
+
+    .piano-black-keys {
+        width: 100vw;
+    }
+
+
+    .black-key a {
+        color: rgb(221, 221, 221);
+        font-size: 1em;
+        position: absolute;
+        left: 10%;
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.5s, transform 0.5s;
+    }
 }
