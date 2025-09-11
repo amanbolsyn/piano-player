@@ -221,8 +221,8 @@ header label {
   font-size: 1.7em;
   opacity: 1;
   transform: scale(1);
-  transition: opacity 0.5s, transform 0.5s;
-
+  transition: opacity 0.5s, transform 0.5s, visibility 0.5s;
+  user-select: none;
 }
 
 .white-key-1 {
@@ -329,6 +329,7 @@ header label {
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.5s, transform 0.5s visibility 0.5s;
+  user-select: none;
 
 }
 
