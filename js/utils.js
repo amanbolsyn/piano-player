@@ -202,6 +202,13 @@ function ShowInformationWindow() {
       informationWindow.classList.remove("hidden")
       informationWindow.style.zIndex = zLevel;
       zLevel++;
+
+      console.log("DKFJ")
+      if (this.innerWidth < 650 || window.innerHeight < 500) {
+        window.scrollTo(0, document.body.scrollHeight);
+        console.log("DJKF")
+      }
+
     } else if (!isShown) {
       informationWindow.classList.add("hidden")
     }
@@ -250,6 +257,11 @@ function ShowPianoMode(isChecked) {
 
   }
 
+
+  if (window.innerWidth < 650) {
+    CloseInformationWindow()
+  }
+
   pianoModeWindow.style.zIndex = zLevel;
   zLevel++;
 
@@ -278,21 +290,12 @@ function PianoModeToggle() {
   }
 
   interactive.addEventListener("change", function () {
-
-    if (this.innerWidth > 649 && this.innerHeight > 499) {
-      CloseInformationWindow()
-    }
-
     localStorage.setItem("piano-mode", "interactive");
     ShowPianoMode(false);
   })
 
   prepared.addEventListener("change", function () {
 
-    if (this.innerWidth > 649 && this.innerHeight > 499) {
-      CloseInformationWindow()
-    }
-    
     localStorage.setItem("piano-mode", "prepared");
     ShowPianoMode(true);
   })
