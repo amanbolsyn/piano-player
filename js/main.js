@@ -6,6 +6,8 @@ import { CloseSheetWindow } from "./utils.js";
 import { ShowInformationWindow } from "./utils.js";
 import { CloseInformationWindow } from "./utils.js";
 import { PianoModeToggle } from "./utils.js";
+import { ClosePianoModeWindow } from "./utils.js";
+import { WindowZLevel } from "./utils.js";
 
 const closeWindowBttns = document.querySelectorAll(".sheet-table .close-button");
 const infoCloseBttn = document.querySelector(".close-button.information");
@@ -21,10 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
     //handels event listenners to each black and white key 
     KeyListeners();
 
+    //controls z index level of window containers when clicked 
+    //makes window container to move forward whenc clicked
+    WindowZLevel();
+
     //note hints logic
     NoteHints();
 
     PianoModeToggle();
+    ClosePianoModeWindow();
 
     //note sheets window logic
     NoteSheets();

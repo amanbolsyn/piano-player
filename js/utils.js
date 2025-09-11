@@ -1,5 +1,7 @@
 //GLOBAL VARIABLES
 
+//helps to determine z index level of opened/clicked windows
+let zLevel = 4;
 
 function ShowNoteHints(isShown) {
 
@@ -101,9 +103,9 @@ function NoteSheets() {
 }
 
 
+
 function ApplyDragEvent() {
 
-  let zLevel = 4;
   const windowHeadings = document.querySelectorAll(".window-container>.window-heading");
   const windowClones = document.querySelectorAll(".window-container-clone")
   const target = document.querySelector(".body-container")
@@ -250,7 +252,13 @@ function PianoModeToggle() {
   const prepared = document.getElementById("prepared-mode");
   let selectedMode = localStorage.getItem("piano-mode")
 
-  if (selectedMode === null || selectedMode === "interactive") { //interactive mode 
+
+  if (selectedMode === null) {
+    localStorage.setItem("piano-mode", "prepared");
+    selectedMode = localStorage.getItem("piano-mode")
+  }
+
+  if (selectedMode === "interactive") { //interactive mode 
     ShowPianoMode(false)
     interactive.checked = true;
   } else if (selectedMode === "prepared") { //prepared mode
@@ -268,6 +276,46 @@ function PianoModeToggle() {
     ShowPianoMode(true);
   })
 
+}
+
+
+//close button functionality on piano mode window
+function ClosePianoModeWindow() {
+
+  const pianoModeWindow = document.getElementById("piano-mode-window")
+  const closePianoModeBttn = pianoModeWindow.querySelector(".close-button");
+  const interactive = document.getElementById("interactive-mode");
+  const prepared = document.getElementById("prepared-mode");
+
+  closePianoModeBttn.addEventListener("click", function () {
+    let selectedMode = localStorage.getItem("piano-mode");
+
+    //swich window modes based on a current selected mode
+    if (selectedMode === "interactive") {
+      ShowPianoMode(true);
+      localStorage.setItem("piano-mode", "prepared")
+      prepared.checked = true
+    } else if (selectedMode === "prepared") {
+      ShowPianoMode(false);
+      localStorage.setItem("piano-mode", "interactive")
+      interactive.checked = true
+    }
+
+  })
+}
+
+
+function WindowZLevel() {
+  const windows = document.querySelectorAll(".window-container")
+  console.log
+
+  for (const selectedWindow of windows) {
+    selectedWindow.addEventListener("click", function () {
+      selectedWindow.style.zIndex = zLevel;
+      console.log("DJFKL")
+      zLevel++;
+    })
+  }
 }
 
 
@@ -376,4 +424,15 @@ function playNote() {
   oscillator.start(0);
 }
 
-export { KeyListeners, NoteHints, NoteSheets, ApplyDragEvent, CloseSheetWindow, ShowInformationWindow, CloseInformationWindow, PianoModeToggle };
+export {
+  KeyListeners,
+  NoteHints,
+  NoteSheets,
+  ApplyDragEvent,
+  CloseSheetWindow,
+  ShowInformationWindow,
+  CloseInformationWindow,
+  PianoModeToggle,
+  ClosePianoModeWindow,
+  WindowZLevel
+};
