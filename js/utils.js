@@ -203,12 +203,6 @@ function ShowInformationWindow() {
       informationWindow.style.zIndex = zLevel;
       zLevel++;
 
-      console.log("DKFJ")
-      if (this.innerWidth < 650 || window.innerHeight < 500) {
-        window.scrollTo(0, document.body.scrollHeight);
-        console.log("DJKF")
-      }
-
     } else if (!isShown) {
       informationWindow.classList.add("hidden")
     }
@@ -258,9 +252,12 @@ function ShowPianoMode(isChecked) {
   }
 
 
-  if (window.innerWidth < 650) {
-    CloseInformationWindow()
-  }
+   if (window.innerWidth < 650 || window.innerHeight < 500) {
+    console.log("width " + window.innerWidth);
+    console.log("hiehgt " + window.innerHeight);
+        CloseInformationWindow();
+      }
+
 
   pianoModeWindow.style.zIndex = zLevel;
   zLevel++;
