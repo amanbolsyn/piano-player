@@ -61,9 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
             CloseSheetWindow(sheetTable.id);
         }
 
-
         //close window containers only for tablets and desktop screens
-        if (this.innerWidth > 649 ) {
+        if (this.innerWidth > 649 && this.innerHeight > 499) {
             CloseInformationWindow();
         }
 

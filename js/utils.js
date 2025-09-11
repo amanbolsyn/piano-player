@@ -278,11 +278,21 @@ function PianoModeToggle() {
   }
 
   interactive.addEventListener("change", function () {
+
+    if (this.innerWidth > 649 && this.innerHeight > 499) {
+      CloseInformationWindow()
+    }
+
     localStorage.setItem("piano-mode", "interactive");
     ShowPianoMode(false);
   })
 
   prepared.addEventListener("change", function () {
+
+    if (this.innerWidth > 649 && this.innerHeight > 499) {
+      CloseInformationWindow()
+    }
+    
     localStorage.setItem("piano-mode", "prepared");
     ShowPianoMode(true);
   })

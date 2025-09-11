@@ -6,7 +6,7 @@
 .note-hint.hidden {
   opacity: 0;
   transform: scale(0.85);
-  transition: opacity 0.3s transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
 }
 
 .window-container.hidden {
@@ -99,7 +99,7 @@ body {
   height: 80px;
   margin: auto;
   background-color: #ebf0f1;
- box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 
@@ -109,7 +109,7 @@ body {
 
 #logo h1 {
   font-family: "Limelight";
-  text-align: end ;
+  text-align: end;
 }
 
 .settings {
@@ -221,7 +221,7 @@ header label {
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.5s, transform 0.5s;
-    user-select: none;
+
 }
 
 .white-key-1 {
@@ -327,8 +327,8 @@ header label {
   left: 10%;
   opacity: 1;
   transform: scale(1);
-  transition: opacity 0.5s, transform 0.5s;
-  user-select: none;
+  transition: opacity 0.5s, transform 0.5s visibility 0.5s;
+
 }
 
 .black-key-1 {
@@ -478,7 +478,7 @@ header label {
   width: auto;
   height: 100%;
   text-align: center;
-  
+
 }
 
 .window-heading a {
@@ -527,7 +527,7 @@ td:nth-of-type(2) {
   padding-bottom: 20px;
   font-family: "Caveat Brush", cursive;
   background-image: url("../assets/information-baackground.jpg");
-  border-radius: 0rem 0rem  0.5rem 0.5rem;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
   background-position: right 10%;
 }
 
