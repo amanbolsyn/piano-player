@@ -43,7 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     //adding drag event to windows
-    ApplyDragEvent();
+    if (window.innerWidth > 649) {
+        ApplyDragEvent();
+    }
 
     //information window logic
     ShowInformationWindow();
@@ -59,7 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
             CloseSheetWindow(sheetTable.id);
         }
 
-        CloseInformationWindow();
+
+        //close window containers only for tablets and desktop screens
+        if (this.innerWidth > 649 ) {
+            CloseInformationWindow();
+        }
 
         //remove all inline styles of window containers if screen width is lesss then 600 pixels
         if (this.innerWidth < 600) {

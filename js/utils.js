@@ -66,10 +66,12 @@ function ShowNoteSheets(isShown) {
   if (isShown) {
     for (const sheet of noteSheets) {
       sheet.classList.remove("hidden");
+      sheet.style.zIndex = zLevel;
     }
 
     tooltipText.innerText = "hide sheets";
     tooltipText.style = "left: -40%"
+    zLevel++;
 
   } else if (!isShown) {
     for (const sheet of noteSheets) {
@@ -188,6 +190,8 @@ function ShowInformationWindow() {
   if (isShown === "true") {
     informationChkBox.checked = true;
     informationWindow.classList.remove("hidden")
+    informationWindow.style.zIndex = zLevel;
+    zLevel++;
   }
 
   informationChkBox.addEventListener("change", function () {
@@ -196,6 +200,8 @@ function ShowInformationWindow() {
 
     if (isShown) {
       informationWindow.classList.remove("hidden")
+      informationWindow.style.zIndex = zLevel;
+      zLevel++;
     } else if (!isShown) {
       informationWindow.classList.add("hidden")
     }
@@ -220,7 +226,7 @@ function ShowPianoMode(isChecked) {
   const preparedSections = document.querySelectorAll(".prepared-section")
   const pianoWindowHeading = document.getElementById("piano-window-heading");
   const pianoWindowHeadingCln = document.getElementById("piano-window-heading-clone");
-
+  const pianoModeWindow = document.getElementById("piano-mode-window")
 
   if (!isChecked) {//interactive section
 
@@ -243,6 +249,11 @@ function ShowPianoMode(isChecked) {
     pianoWindowHeadingCln.innerText = "prepared mode"
 
   }
+
+  pianoModeWindow.style.zIndex = zLevel;
+  zLevel++;
+
+
 }
 
 
@@ -307,12 +318,10 @@ function ClosePianoModeWindow() {
 
 function WindowZLevel() {
   const windows = document.querySelectorAll(".window-container")
-  console.log
 
   for (const selectedWindow of windows) {
     selectedWindow.addEventListener("click", function () {
       selectedWindow.style.zIndex = zLevel;
-      console.log("DJFKL")
       zLevel++;
     })
   }
