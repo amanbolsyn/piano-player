@@ -271,7 +271,6 @@ function PianoModeToggle() {
 }
 
 
-
 function KeyListeners() {
 
   const whiteKeys = document.querySelectorAll(".white-key");
