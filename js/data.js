@@ -3,9 +3,6 @@ function KeyListeners() {
     const whiteKeys = document.querySelectorAll(".white-key");
     const blackKeys = document.querySelectorAll(".black-key");
 
-    const whiteKeysContainer = document.querySelector(".piano-white-keys");
-    const blackKeysContainer = document.querySelector(".piano-black-keys");
-
     const blackKeysMap = new Map([
         ["Digit2", ".black-key-1"],
         ["Digit3", ".black-key-2"],
@@ -43,18 +40,16 @@ function KeyListeners() {
 
     const pressedKeys = new Set();
     const pianoKeys = [...whiteKeys, ...blackKeys];
-    console.log(pianoKeys);
 
     //mouse events on piano keys
     pianoKeys.forEach((pianoKey) => {
-        pianoKey.addEventListener("mousedown", function () {
-            playNote();
+        pianoKey.addEventListener("mousedown", function (e) {
+            playNote(pianoKey.getAttribute("data-note"));
         })
     })
 
     //keyboard event on piano keys
     function HandleKeayboarKeys(e, action) {
-
         const keyCode = e.code
 
         if (blackKeysMap.has(keyCode)) {
@@ -64,7 +59,7 @@ function KeyListeners() {
 
                 //play a note if action is "add"
                 if (action === "add" && !pressedKeys.has(keyCode)) {
-                    playNote();
+                    playNote(blackKey.getAttribute("data-note"));
                     //prevents calling the same playNote function several times when the key is pressed
                     //recrods each keyCode of pressed key in set until user stops pressing that key
                     pressedKeys.add(keyCode)
@@ -80,7 +75,7 @@ function KeyListeners() {
 
                 //play a note if action is "add"
                 if (action === "add" && !pressedKeys.has(keyCode)) {
-                    playNote()
+                    playNote(whiteKey.getAttribute("data-note"))
                     //prevents calling the same playNote function several times when the key is pressed
                     //recrods each keyCode of pressed key in set until user stops pressing that key
                     pressedKeys.add(keyCode)
@@ -97,29 +92,39 @@ function KeyListeners() {
 
 }
 
+//max 5 audio elements 
+//max 5 keys can be pressed simultenously 
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-function playNote() {
-    let oscillator = audioCtx.createOscillator();
+const audioElements = [];
+for (let i = 0; i < 5; i++) {
 
-    //Select a waveform type (sine, triangle,...)
-    oscillator.type = "sine";
+    audioElements[i] = new Audio;
+}
 
-    //Select a frequency
-    oscillator.frequency.value = 440;
+let audioElementNum = 0;
+let isConnected = false;
 
-    //Create volume
-    const gainNode = audioCtx.createGain();
-    //Set the duration
-    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
 
-    //Connect our audiosource(oscillator) with the volume
-    oscillator.connect(gainNode);
-    //Connect inputgain with the output (Speakers)
-    gainNode.connect(audioCtx.destination);
+function playNote(note) {
 
-    oscillator.start(0);
+    audioElements[audioElementNum].src = `../assets/notes/${note}.mp3`;
+
+    if (!isConnected) {
+        const track = audioCtx.createMediaElementSource(audioElements[audioElementNum]);
+
+        track.connect(audioCtx.destination);
+    }
+
+    audioElements[audioElementNum].play()
+
+    audioElementNum++
+    if (audioElementNum >= 4) {
+        audioElementNum = 0;
+        isConnected = true;
+    }
+
 }
 
 export {
