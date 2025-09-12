@@ -109,7 +109,7 @@ let isConnected = false;
 
 function playNote(note) {
 
-    audioElements[audioElementNum].src = `../assets/notes/${note}.mp3`;
+    audioElements[audioElementNum].src = `./assets/notes/${note}.mp3`;
 
     if (!isConnected) {
         const track = audioCtx.createMediaElementSource(audioElements[audioElementNum]);
