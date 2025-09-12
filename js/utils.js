@@ -253,8 +253,6 @@ function ShowPianoMode(isChecked) {
 
 
    if (window.innerWidth < 650 || window.innerHeight < 500) {
-    console.log("width " + window.innerWidth);
-    console.log("hiehgt " + window.innerHeight);
         CloseInformationWindow();
       }
 

@@ -96,34 +96,36 @@ function KeyListeners() {
 //max 5 keys can be pressed simultenously 
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
+const MAX_KEYS_ACTIVE = 6;
 const audioElements = [];
-for (let i = 0; i < 5; i++) {
 
-    audioElements[i] = new Audio;
+for (let i = 0; i < MAX_KEYS_ACTIVE; i++) {
+
+    const audio = new Audio;
+    audio.preload = "auto"
+    audioElements.push(audio);
+
+    const source = audioCtx.createMediaElementSource(audio);
+    source.connect(audioCtx.destination);
 }
 
-let audioElementNum = 0;
-let isConnected = false;
+let currentIndex = 0;
+// let isConnected = false;
 
 
 function playNote(note) {
 
-    audioElements[audioElementNum].src = `./assets/notes/${note}.mp3`;
+    const audio = audioElements[currentIndex];
 
-    if (!isConnected) {
-        const track = audioCtx.createMediaElementSource(audioElements[audioElementNum]);
+    audio.src = `./assets/notes/${note}.mp3`;
 
-        track.connect(audioCtx.destination);
-    }
+    // Resume context first
+    audioCtx.resume().then(() => {
+        audio.currentTime = 0;
+        audio.play().catch(err => console.warn("Play failed", err));
+    });
 
-    audioElements[audioElementNum].play()
-
-    audioElementNum++
-    if (audioElementNum >= 4) {
-        audioElementNum = 0;
-        isConnected = true;
-    }
+    currentIndex = (currentIndex + 1) % MAX_KEYS_ACTIVE;
 
 }
 
