@@ -1,4 +1,10 @@
-//GLOBAL VARIABLES
+//DOM vars
+
+//interactive mode buttons
+const recordBttns = document.querySelectorAll(".record-button");
+const stopRecordBttns = document.querySelectorAll(".stop-record-button");
+const downloadRecordBttns = document.querySelectorAll(".download-record-button");
+
 
 //helps to determine z index level of opened/clicked windows
 let zLevel = 4;
@@ -225,37 +231,39 @@ function ShowPianoMode(isChecked) {
 
   const interactiveSections = document.querySelectorAll(".interactive-section");
   const preparedSections = document.querySelectorAll(".prepared-section")
-  const pianoWindowHeading = document.getElementById("piano-window-heading");
-  const pianoWindowHeadingCln = document.getElementById("piano-window-heading-clone");
+  const pianoWindowHeadings = document.querySelectorAll(".piano-window-heading");
   const pianoModeWindow = document.getElementById("piano-mode-window")
 
   if (!isChecked) {//interactive section
 
-    for (let i = 0; i < interactiveSections.length; i++) {
-      interactiveSections[i].style.display = "block"
-      preparedSections[i].style.display = "none"
-    }
+    for (let i = 0; i < 2; i++) {
+      preparedSections[i].style.display = "none";
+      interactiveSections[i].style.display = "block";
+      pianoWindowHeadings[i].innerText = "interactive mode"
 
-    pianoWindowHeading.innerText = "interactive mode"
-    pianoWindowHeadingCln.innerText = "interactive mode"
+      recordBttns[i].classList.add("flex");
+      recordBttns[i].classList.remove("none");
+      stopRecordBttns[i].classList.add("none");
+      downloadRecordBttns[i].classList.add("none");
+
+    }
 
   } else if (isChecked) {//prepared section
 
-    for (let i = 0; i < interactiveSections.length; i++) {
+    for (let i = 0; i < 2; i++) {
       interactiveSections[i].style.display = "none"
       preparedSections[i].style.display = "block"
-    }
+      pianoWindowHeadings[i].innerText = "prepared mode"
 
-    pianoWindowHeading.innerText = "prepared mode"
-    pianoWindowHeadingCln.innerText = "prepared mode"
+
+    }
 
   }
 
-
-   if (window.innerWidth < 650 || window.innerHeight < 500) {
-        CloseInformationWindow();
-      }
-
+  //automatically close info window during mode switch on mobile phones
+  if (window.innerWidth < 650 || window.innerHeight < 500) {
+    CloseInformationWindow();
+  }
 
   pianoModeWindow.style.zIndex = zLevel;
   zLevel++;

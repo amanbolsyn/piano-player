@@ -1,3 +1,14 @@
+let selectedMode = localStorage.getItem("piano-mode");
+if (selectedMode === null) {
+    selectedMode = "prepared";
+}
+let isRecording = false
+
+//interactive mode buttons
+const recordBttns = document.querySelectorAll(".record-button");
+const stopRecordBttns = document.querySelectorAll(".stop-record-button");
+const downloadRecordBttns = document.querySelectorAll(".download-record-button");
+
 function KeyListeners() {
 
     const whiteKeys = document.querySelectorAll(".white-key");
@@ -94,7 +105,6 @@ function KeyListeners() {
 
 //max 5 audio elements 
 //max 5 keys can be pressed simultenously 
-
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const MAX_KEYS_ACTIVE = 6;
 const audioElements = [];
@@ -110,8 +120,6 @@ for (let i = 0; i < MAX_KEYS_ACTIVE; i++) {
 }
 
 let currentIndex = 0;
-// let isConnected = false;
-
 
 function playNote(note) {
 
@@ -128,6 +136,41 @@ function playNote(note) {
     currentIndex = (currentIndex + 1) % MAX_KEYS_ACTIVE;
 
 }
+
+
+recordBttns[0].addEventListener("click", function () {
+
+    for (let i = 0; i < 2; i++) {
+        recordBttns[i].classList.add("none");
+        stopRecordBttns[i].classList.remove("none");
+        stopRecordBttns[i].classList.add("flex");
+
+    }
+
+    isRecording = true;
+})
+
+stopRecordBttns[0].addEventListener("click", function () {
+
+    for (let i = 0; i < 2; i++) {
+        stopRecordBttns[i].classList.add("none");
+        downloadRecordBttns[i].classList.remove("none");
+        downloadRecordBttns[i].classList.add("flex");
+    }
+
+    isRecording = false;
+})
+
+downloadRecordBttns[0].addEventListener("click", function () {
+
+    for (let i = 0; i < 2; i++) {
+        downloadRecordBttns[i].classList.add("none");
+        recordBttns[i].classList.remove("none")
+        recordBttns[i].classList.add("flex");
+    }
+
+})
+
 
 export {
     KeyListeners
