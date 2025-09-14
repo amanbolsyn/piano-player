@@ -2,12 +2,16 @@ let selectedMode = localStorage.getItem("piano-mode");
 if (selectedMode === null) {
     selectedMode = "prepared";
 }
-let isRecording = false
+let isRecording = false;
+let recordedSong = [], playedNotes = [];
+let recordStartTime, recordDuration, recordName;
 
 //interactive mode buttons
 const recordBttns = document.querySelectorAll(".record-button");
 const stopRecordBttns = document.querySelectorAll(".stop-record-button");
 const downloadRecordBttns = document.querySelectorAll(".download-record-button");
+
+const songLink = document.getElementById("song-link");
 
 function KeyListeners() {
 
@@ -98,8 +102,8 @@ function KeyListeners() {
 
     }
 
-    document.addEventListener("keypress", (e) => HandleKeayboarKeys(event, "add"))
-    document.addEventListener("keyup", (e) => HandleKeayboarKeys(event, "remove"))
+    document.addEventListener("keypress", () => HandleKeayboarKeys(event, "add"))
+    document.addEventListener("keyup", () => HandleKeayboarKeys(event, "remove"))
 
 }
 
@@ -122,22 +126,24 @@ for (let i = 0; i < MAX_KEYS_ACTIVE; i++) {
 let currentIndex = 0;
 
 function playNote(note) {
-
     const audio = audioElements[currentIndex];
-
     audio.src = `./assets/notes/${note}.mp3`;
-
     // Resume context first
     audioCtx.resume().then(() => {
         audio.currentTime = 0;
         audio.play().catch(err => console.warn("Play failed", err));
     });
 
-    currentIndex = (currentIndex + 1) % MAX_KEYS_ACTIVE;
+    if (isRecording) {
+        let keyPressTime = Date.now() - recordStartTime;
+        RecordNote(note, keyPressTime);
+    }
 
+    currentIndex = (currentIndex + 1) % MAX_KEYS_ACTIVE;
 }
 
 
+//only changes isRecording boolean var to true i GUESS?
 recordBttns[0].addEventListener("click", function () {
 
     for (let i = 0; i < 2; i++) {
@@ -147,9 +153,11 @@ recordBttns[0].addEventListener("click", function () {
 
     }
 
+    recordStartTime = Date.now();
     isRecording = true;
 })
 
+//changes isReacording boolean var back to false and than stores recorded array of objects(played notes) into a file
 stopRecordBttns[0].addEventListener("click", function () {
 
     for (let i = 0; i < 2; i++) {
@@ -158,9 +166,19 @@ stopRecordBttns[0].addEventListener("click", function () {
         downloadRecordBttns[i].classList.add("flex");
     }
 
+    recordDuration = Date.now() - recordStartTime;
+
+    recordedSong = {
+        "name": "My Song",
+        "duration": recordDuration,
+        "notes": playedNotes,
+    }
     isRecording = false;
+    exportJSONFile(recordedSong.name, recordedSong)
 })
 
+
+//can download only once and changes it state to recrod again
 downloadRecordBttns[0].addEventListener("click", function () {
 
     for (let i = 0; i < 2; i++) {
@@ -169,7 +187,40 @@ downloadRecordBttns[0].addEventListener("click", function () {
         recordBttns[i].classList.add("flex");
     }
 
+    songLink.click();
+    URL.revokeObjectURL(songLink.url);
+    
+
 })
+
+//note recroting functionlity 
+function RecordNote(note, time) {
+
+    let playedNote = {
+        "key": note,
+        "startTime": time,
+    }
+
+    playedNotes.push(playedNote);
+
+}
+
+function exportJSONFile(filename, data) {
+    // Step 1: Convert the JavaScript object to a JSON string
+    const jsonString = JSON.stringify(data, null, 2);
+
+    // Step 2: Create a Blob (binary large object) with the JSON string
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // Step 3: Create a temporary URL pointing to that blob
+    const url = URL.createObjectURL(blob);
+
+    // Step 4: Create a temporary <a> element to trigger the download
+    songLink.href = url;
+    songLink.download = filename; // e.g. "data.json"
+}
+
+
 
 
 export {

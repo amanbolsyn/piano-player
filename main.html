@@ -587,14 +587,21 @@
               stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
-        <div class="mode-button stop-record-button none" >
+        <div class="mode-button stop-record-button none">
           <svg fill="#FFFFFF" height="44px" width="44px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
             <path d="M23,8H9C8.4,8,8,8.4,8,9v14c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V9C24,8.4,23.6,8,23,8z" />
           </svg>
         </div>
         <div class="mode-button download-record-button none">
-
+          <svg width="48px" height="48px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 10V20M12 20L9.5 17.5M12 20L14.5 17.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M6.3218 7.05726C7.12925 4.69709 9.36551 3 12 3C14.6345 3 16.8708 4.69709 17.6782 7.05726C19.5643 7.37938 21 9.02203 21 11C21 13.2091 19.2091 15 17 15H16C15.4477 15 15 14.5523 15 14C15 13.4477 15.4477 13 16 13H17C18.1046 13 19 12.1046 19 11C19 9.89543 18.1046 9 17 9C16.9776 9 16.9552 9.00037 16.9329 9.0011C16.4452 9.01702 16.0172 8.67854 15.9202 8.20023C15.5502 6.37422 13.9345 5 12 5C10.0655 5 8.44979 6.37422 8.07977 8.20023C7.98284 8.67854 7.55482 9.01702 7.06706 9.0011C7.04476 9.00037 7.02241 9 7 9C5.89543 9 5 9.89543 5 11C5 12.1046 5.89543 13 7 13H8C8.55228 13 9 13.4477 9 14C9 14.5523 8.55228 15 8 15H7C4.79086 15 3 13.2091 3 11C3 9.02203 4.43567 7.37938 6.3218 7.05726Z"
+              fill="#ffffff" />
+          </svg>
+           <a id="song-link"></a>
         </div>
       </section>
       <section class="prepared-section">
@@ -617,26 +624,69 @@
         <div></div>
       </div>
       <section class="interactive-section">
-      <div class="mode-button record-button">
+        <div class="mode-button record-button">
           <svg width="36px" height="36px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16M12 15C10.3431 15 9 13.6569 9 12V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V12C15 13.6569 13.6569 15 12 15Z"
               stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
-        <div class="mode-button stop-record-button none" >
+        <div class="mode-button stop-record-button none">
           <svg fill="#FFFFFF" height="44px" width="44px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve">
             <path d="M23,8H9C8.4,8,8,8.4,8,9v14c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1V9C24,8.4,23.6,8,23,8z" />
           </svg>
         </div>
         <div class="mode-button download-record-button none">
+          <svg width="48px" height="48px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 10V20M12 20L9.5 17.5M12 20L14.5 17.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M6.3218 7.05726C7.12925 4.69709 9.36551 3 12 3C14.6345 3 16.8708 4.69709 17.6782 7.05726C19.5643 7.37938 21 9.02203 21 11C21 13.2091 19.2091 15 17 15H16C15.4477 15 15 14.5523 15 14C15 13.4477 15.4477 13 16 13H17C18.1046 13 19 12.1046 19 11C19 9.89543 18.1046 9 17 9C16.9776 9 16.9552 9.00037 16.9329 9.0011C16.4452 9.01702 16.0172 8.67854 15.9202 8.20023C15.5502 6.37422 13.9345 5 12 5C10.0655 5 8.44979 6.37422 8.07977 8.20023C7.98284 8.67854 7.55482 9.01702 7.06706 9.0011C7.04476 9.00037 7.02241 9 7 9C5.89543 9 5 9.89543 5 11C5 12.1046 5.89543 13 7 13H8C8.55228 13 9 13.4477 9 14C9 14.5523 8.55228 15 8 15H7C4.79086 15 3 13.2091 3 11C3 9.02203 4.43567 7.37938 6.3218 7.05726Z"
+              fill="#ffffff" />
+          </svg>
 
         </div>
       </section>
       <section class="prepared-section">
         <p>PREPARED SECTION, PREPARED SECTION, PREPARED SECTION, PREPARED SECTION, PREPARED SECTION, PREPARED SECTION,
           PREPARED SECTION. </p>
+      </section>
+    </div>
+    <div id="song-name-window" class="window-container hidden">
+      <div class="window-heading" draggable="true">
+        <div class="close-button"><svg width="9px" height="9px" viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill="#000000"
+              d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512 195.2 285.696a64 64 0 0 1 0-90.496z" />
+          </svg></div>
+        <div></div>
+        <div></div>
+        <div><a>song name</a></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <section>
+        <input type="text" placeholder="song name...">
+      </section>
+    </div>
+    <div class="window-container-clone">
+      <div class="window-heading" draggable="true">
+        <div class="close-button"><svg width="9px" height="9px" viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill="#000000"
+              d="M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 512 195.2 285.696a64 64 0 0 1 0-90.496z" />
+          </svg></div>
+        <div></div>
+        <div></div>
+        <div><a>song name</a></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <section>
+        <input type="text" placeholder="song name...">
       </section>
     </div>
   </main>

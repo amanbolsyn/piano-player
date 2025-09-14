@@ -255,7 +255,7 @@ function ShowPianoMode(isChecked) {
       preparedSections[i].style.display = "block"
       pianoWindowHeadings[i].innerText = "prepared mode"
 
-
+  
     }
 
   }
