@@ -1,4 +1,5 @@
-import { KeyListeners } from "./data.js"
+import { KeyListeners} from "./data.js"
+import {LoadAudioFiles } from "./data.js"
 import { NoteHints } from "./utils.js";
 import { NoteSheets } from "./utils.js";
 import { ApplyDragEvent } from "./utils.js";
@@ -9,6 +10,7 @@ import { PianoModeToggle } from "./utils.js";
 import { ClosePianoModeWindow } from "./utils.js";
 import { WindowZLevel } from "./utils.js";
 
+
 const closeWindowBttns = document.querySelectorAll(".sheet-table .close-button");
 const infoCloseBttn = document.querySelector(".close-button.information");
 const sheetTables = document.querySelectorAll(".window-container.sheet-table");
@@ -17,11 +19,11 @@ const pianoModeWindow = document.getElementById("piano-mode-window")
 
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
 
     //handels event listenners to each black and white key 
     KeyListeners();
+    await LoadAudioFiles()
 
     //controls z index level of window containers when clicked 
     //makes window container to move forward whenc clicked

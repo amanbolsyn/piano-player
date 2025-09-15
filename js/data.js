@@ -2,9 +2,29 @@ let selectedMode = localStorage.getItem("piano-mode");
 if (selectedMode === null) {
     selectedMode = "prepared";
 }
+
 let isRecording = false;
 let recordedSong = [], playedNotes = [];
 let recordStartTime, recordDuration, recordName;
+const audioFiles = ["A3.mp3", "A4.mp3", "Ab3.mp3", "Ab4.mp3", "B3.mp3", "B4.mp3", "Bb3.mp3", "Bb4.mp3", "C3.mp3",
+    "C4.mp3", "C5.mp3", "D3.mp3", "D4.mp3", "D5.mp3", "Db3.mp3", "Db4.mp3", "E3.mp3", "E4.mp3", "E5.mp3",
+    "Eb3.mp3", "Eb4.mp3", "Eb5.mp3", "F3.mp3", "F4.mp3", "G3.mp3", "G4.mp3", "Gb3.mp3", "Gb4.mp3"
+]
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const bufferFiles = [];
+
+
+async function LoadAudioFiles() {
+    for (const file of audioFiles) {
+        const response = await fetch(`../assets/notes/${file}`);
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+        bufferFiles[file] = audioBuffer;
+        console.log(bufferFiles[file]);
+        console.log(file)
+    }
+}
 
 //interactive mode buttons
 const recordBttns = document.querySelectorAll(".record-button");
@@ -59,7 +79,8 @@ function KeyListeners() {
     //mouse events on piano keys
     pianoKeys.forEach((pianoKey) => {
         pianoKey.addEventListener("mousedown", function (e) {
-            playNote(pianoKey.getAttribute("data-note"));
+            let file = `${pianoKey.getAttribute("data-note")}.mp3`
+            playNote(file);
         })
     })
 
@@ -74,7 +95,8 @@ function KeyListeners() {
 
                 //play a note if action is "add"
                 if (action === "add" && !pressedKeys.has(keyCode)) {
-                    playNote(blackKey.getAttribute("data-note"));
+                    let file = `${blackKey.getAttribute("data-note")}.mp3`
+                    playNote(file);
                     //prevents calling the same playNote function several times when the key is pressed
                     //recrods each keyCode of pressed key in set until user stops pressing that key
                     pressedKeys.add(keyCode)
@@ -90,7 +112,8 @@ function KeyListeners() {
 
                 //play a note if action is "add"
                 if (action === "add" && !pressedKeys.has(keyCode)) {
-                    playNote(whiteKey.getAttribute("data-note"))
+                    let file = `${whiteKey.getAttribute("data-note")}.mp3`
+                    playNote(file)
                     //prevents calling the same playNote function several times when the key is pressed
                     //recrods each keyCode of pressed key in set until user stops pressing that key
                     pressedKeys.add(keyCode)
@@ -105,41 +128,36 @@ function KeyListeners() {
     document.addEventListener("keypress", () => HandleKeayboarKeys(event, "add"))
     document.addEventListener("keyup", () => HandleKeayboarKeys(event, "remove"))
 
+
 }
 
-//max 5 audio elements 
-//max 5 keys can be pressed simultenously 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const MAX_KEYS_ACTIVE = 6;
-const audioElements = [];
+//note recroting functionlity 
+function RecordNote(note, time) {
 
-for (let i = 0; i < MAX_KEYS_ACTIVE; i++) {
+    let playedNote = {
+        "key": note,
+        "startTime": time,
+    }
 
-    const audio = new Audio;
-    audio.preload = "auto"
-    audioElements.push(audio);
+    playedNotes.push(playedNote);
 
-    const source = audioCtx.createMediaElementSource(audio);
-    source.connect(audioCtx.destination);
 }
 
-let currentIndex = 0;
 
-function playNote(note) {
-    const audio = audioElements[currentIndex];
-    audio.src = `./assets/notes/${note}.mp3`;
-    // Resume context first
-    audioCtx.resume().then(() => {
-        audio.currentTime = 0;
-        audio.play().catch(err => console.warn("Play failed", err));
-    });
+function playNote(file) {
+
+    const source = audioCtx.createBufferSource();
+    source.buffer = bufferFiles[file];
 
     if (isRecording) {
         let keyPressTime = Date.now() - recordStartTime;
-        RecordNote(note, keyPressTime);
+        RecordNote(file, keyPressTime);
+        console.log("KDFJL")
     }
 
-    currentIndex = (currentIndex + 1) % MAX_KEYS_ACTIVE;
+    source.connect(audioCtx.destination);
+    source.start();
+
 }
 
 
@@ -173,6 +191,7 @@ stopRecordBttns[0].addEventListener("click", function () {
         "duration": recordDuration,
         "notes": playedNotes,
     }
+
     isRecording = false;
     exportJSONFile(recordedSong.name, recordedSong)
 })
@@ -189,21 +208,9 @@ downloadRecordBttns[0].addEventListener("click", function () {
 
     songLink.click();
     URL.revokeObjectURL(songLink.url);
-    
+
 
 })
-
-//note recroting functionlity 
-function RecordNote(note, time) {
-
-    let playedNote = {
-        "key": note,
-        "startTime": time,
-    }
-
-    playedNotes.push(playedNote);
-
-}
 
 function exportJSONFile(filename, data) {
     // Step 1: Convert the JavaScript object to a JSON string
@@ -224,5 +231,6 @@ function exportJSONFile(filename, data) {
 
 
 export {
-    KeyListeners
+    KeyListeners,
+    LoadAudioFiles
 }
