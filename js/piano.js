@@ -7,12 +7,25 @@ let isRecording = false;
 let recordedSong = [], playedNotes = [];
 let recordStartTime, recordDuration, recordName;
 const audioFiles = ["A3.mp3", "A4.mp3", "Ab3.mp3", "Ab4.mp3", "B3.mp3", "B4.mp3", "Bb3.mp3", "Bb4.mp3", "C3.mp3",
-    "C4.mp3", "C5.mp3", "D3.mp3", "D4.mp3", "D5.mp3", "Db3.mp3", "Db4.mp3", "E3.mp3", "E4.mp3", "E5.mp3",
+    "C4.mp3", "C5.mp3", "D3.mp3", "D4.mp3", "D5.mp3", "Db3.mp3", "Db4.mp3", "Db5.mp3", "E3.mp3", "E4.mp3", "E5.mp3",
     "Eb3.mp3", "Eb4.mp3", "Eb5.mp3", "F3.mp3", "F4.mp3", "G3.mp3", "G4.mp3", "Gb3.mp3", "Gb4.mp3"
 ]
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const bufferFiles = [];
+
+//interactive mode buttons
+const recordBttns = document.querySelectorAll(".record-button");
+const stopRecordBttns = document.querySelectorAll(".stop-record-button");
+const downloadRecordBttns = document.querySelectorAll(".download-record-button");
+
+const songLink = document.getElementById("song-link");
+
+const songNameWindow = document.getElementById("song-name-window");
+const songNameForm = document.getElementById("song-name-form");
+const songNameInput = document.getElementById("song-name-input");
+const errorMessage = document.querySelector(".error");
+
 
 
 async function LoadAudioFiles() {
@@ -21,17 +34,8 @@ async function LoadAudioFiles() {
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
         bufferFiles[file] = audioBuffer;
-        console.log(bufferFiles[file]);
-        console.log(file)
     }
 }
-
-//interactive mode buttons
-const recordBttns = document.querySelectorAll(".record-button");
-const stopRecordBttns = document.querySelectorAll(".stop-record-button");
-const downloadRecordBttns = document.querySelectorAll(".download-record-button");
-
-const songLink = document.getElementById("song-link");
 
 function KeyListeners() {
 
@@ -86,6 +90,10 @@ function KeyListeners() {
 
     //keyboard event on piano keys
     function HandleKeayboarKeys(e, action) {
+
+        if (e.target.tagName === "INPUT") {
+            return
+        }
         const keyCode = e.code
 
         if (blackKeysMap.has(keyCode)) {
@@ -132,15 +140,15 @@ function KeyListeners() {
 }
 
 //note recroting functionlity 
-function RecordNote(note, time) {
+function RecordNote(note, time, duration) {
 
     let playedNote = {
         "key": note,
         "startTime": time,
+        "duration": duration,
     }
 
     playedNotes.push(playedNote);
-
 }
 
 
@@ -151,13 +159,39 @@ function playNote(file) {
 
     if (isRecording) {
         let keyPressTime = Date.now() - recordStartTime;
-        RecordNote(file, keyPressTime);
-        console.log("KDFJL")
+        RecordNote(file.slice(0, -4), keyPressTime, bufferFiles[file].duration);
     }
 
     source.connect(audioCtx.destination);
     source.start();
 
+}
+
+async function GetSongName() {
+
+    songNameWindow.classList.remove("hidden");
+
+    await new Promise((resolve) => {
+
+        function ValidateName(e) {
+            e.preventDefault();
+
+            recordName = songNameInput.value.trim();
+
+            if (recordName !== "") {
+                songNameForm.removeEventListener("submit", ValidateName)
+                songNameWindow.classList.add("hidden");
+                songNameInput.value = "";
+                 errorMessage.innerText = "";
+                resolve();
+            } else {
+              errorMessage.innerText = "input valid song name";
+            }
+
+        }
+        songNameForm.addEventListener("submit", ValidateName);
+
+    });
 }
 
 
@@ -176,7 +210,11 @@ recordBttns[0].addEventListener("click", function () {
 })
 
 //changes isReacording boolean var back to false and than stores recorded array of objects(played notes) into a file
-stopRecordBttns[0].addEventListener("click", function () {
+stopRecordBttns[0].addEventListener("click", async function () {
+
+    recordDuration = Date.now() - recordStartTime;
+
+    await GetSongName();
 
     for (let i = 0; i < 2; i++) {
         stopRecordBttns[i].classList.add("none");
@@ -184,10 +222,8 @@ stopRecordBttns[0].addEventListener("click", function () {
         downloadRecordBttns[i].classList.add("flex");
     }
 
-    recordDuration = Date.now() - recordStartTime;
-
     recordedSong = {
-        "name": "My Song",
+        "name": recordName,
         "duration": recordDuration,
         "notes": playedNotes,
     }
@@ -208,7 +244,7 @@ downloadRecordBttns[0].addEventListener("click", function () {
 
     songLink.click();
     URL.revokeObjectURL(songLink.url);
-
+    recordedSong = [];
 
 })
 
@@ -226,8 +262,6 @@ function exportJSONFile(filename, data) {
     songLink.href = url;
     songLink.download = filename; // e.g. "data.json"
 }
-
-
 
 
 export {

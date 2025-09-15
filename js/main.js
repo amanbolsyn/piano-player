@@ -1,5 +1,5 @@
-import { KeyListeners} from "./data.js"
-import {LoadAudioFiles } from "./data.js"
+import { KeyListeners} from "./piano.js"
+import {LoadAudioFiles } from "./piano.js"
 import { NoteHints } from "./utils.js";
 import { NoteSheets } from "./utils.js";
 import { ApplyDragEvent } from "./utils.js";

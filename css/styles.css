@@ -1,9 +1,9 @@
 .flex {
-  display: flex 
+  display: flex
 }
 
 .none {
-  display: none 
+  display: none
 }
 
 .hidden {
@@ -639,7 +639,7 @@ td:nth-of-type(2) {
   }
 }
 
-.download-record-button{
+.download-record-button {
   background-color: rgba(34, 18, 255, 0.834);
 }
 
@@ -659,6 +659,43 @@ td:nth-of-type(2) {
 .prepared-section {
   padding: 10px;
 }
+
+#song-name-window {
+  top: 60%;
+  left: 15%;
+}
+
+.song-input-section {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.song-input-section input {
+  height: 20px;
+  border: none;
+  outline: none;
+  background-color: #ebf0f1;
+  border-radius: 0.3rem;
+  padding: 0.5em 0.7em;
+  font-size: 0.75em;
+  font-weight: 500;
+  flex: 1;
+}
+
+.song-iput-section a {
+  flex: 1;
+}
+
+.error {
+  margin-top: 0.2em;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 0.92em;
+  color: red;
+}
+
 
 .footer {
   grid-area: footer;
@@ -719,7 +756,7 @@ td:nth-of-type(2) {
   }
 
   .download-record-button:hover::after {
-    background-color:rgba(55, 41, 255, 0.834);
+    background-color: rgba(55, 41, 255, 0.834);
     transform: scale(1);
   }
 
