@@ -17,7 +17,7 @@ const bufferFiles = [];
 
 async function LoadAudioFiles() {
     for (const file of audioFiles) {
-        const response = await fetch(`../assets/notes/${file}`);
+        const response = await fetch(`./assets/notes/${file}`);
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
         bufferFiles[file] = audioBuffer;
