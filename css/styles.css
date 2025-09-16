@@ -1,3 +1,7 @@
+:root{
+  --animation-state: running;
+}
+
 .flex {
   display: flex
 }
@@ -573,7 +577,7 @@ td:nth-of-type(2) {
   height: max-content;
 }
 
-.interactive-section {
+.interactive-section, .prepared-section {
   padding: 1em;
   display: flex;
   justify-content: center;
@@ -614,7 +618,6 @@ td:nth-of-type(2) {
   background-color: rgb(255, 59, 59);
 }
 
-
 .stop-record-button::after {
   content: "";
   position: absolute;
@@ -623,6 +626,7 @@ td:nth-of-type(2) {
   border-radius: 50%;
   background-color: rgb(255, 59, 59);
   animation: recording infinite 2.5s;
+  animation-play-state:var(--animation-state);
 }
 
 @keyframes recording {
@@ -639,11 +643,11 @@ td:nth-of-type(2) {
   }
 }
 
-.download-record-button {
+.download-record-button, .upload-record-button {
   background-color: rgba(34, 18, 255, 0.834);
 }
 
-.download-record-button::after {
+.download-record-button::after, .upload-record-button::after{
   content: "";
   position: absolute;
   width: inherit;
@@ -654,10 +658,6 @@ td:nth-of-type(2) {
 
   transition: transform 1s ease, background-color 0.5s ease;
   pointer-events: none;
-}
-
-.prepared-section {
-  padding: 10px;
 }
 
 #song-name-window {
@@ -694,6 +694,10 @@ td:nth-of-type(2) {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 0.92em;
   color: red;
+}
+
+.prepared-section input {
+  display: none;
 }
 
 
@@ -755,7 +759,7 @@ td:nth-of-type(2) {
     transform: scale(1);
   }
 
-  .download-record-button:hover::after {
+  .download-record-button:hover::after, .upload-record-button:hover::after {
     background-color: rgba(55, 41, 255, 0.834);
     transform: scale(1);
   }

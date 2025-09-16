@@ -14,7 +14,9 @@ const audioFiles = ["A3.mp3", "A4.mp3", "Ab3.mp3", "Ab4.mp3", "B3.mp3", "B4.mp3"
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const bufferFiles = [];
 
-//interactive mode buttons
+const rootEl = document.querySelector(":root");
+
+//interactive mode vars
 const recordBttns = document.querySelectorAll(".record-button");
 const stopRecordBttns = document.querySelectorAll(".stop-record-button");
 const downloadRecordBttns = document.querySelectorAll(".download-record-button");
@@ -25,6 +27,11 @@ const songNameWindow = document.getElementById("song-name-window");
 const songNameForm = document.getElementById("song-name-form");
 const songNameInput = document.getElementById("song-name-input");
 const errorMessage = document.querySelector(".error");
+let uploadedSongData;
+
+//prepared mode vars
+const uploadSongInput = document.getElementById("upload-song-file");
+let parsedSong;
 
 
 
@@ -182,10 +189,10 @@ async function GetSongName() {
                 songNameForm.removeEventListener("submit", ValidateName)
                 songNameWindow.classList.add("hidden");
                 songNameInput.value = "";
-                 errorMessage.innerText = "";
+                errorMessage.innerText = "";
                 resolve();
             } else {
-              errorMessage.innerText = "input valid song name";
+                errorMessage.innerText = "input valid song name";
             }
 
         }
@@ -213,7 +220,7 @@ recordBttns[0].addEventListener("click", function () {
 stopRecordBttns[0].addEventListener("click", async function () {
 
     recordDuration = Date.now() - recordStartTime;
-
+    rootEl.style.setProperty('--animation-state', 'paused');//stops animation for stop button
     await GetSongName();
 
     for (let i = 0; i < 2; i++) {
@@ -262,6 +269,72 @@ function exportJSONFile(filename, data) {
     songLink.href = url;
     songLink.download = filename; // e.g. "data.json"
 }
+
+
+function CheckJSON(song) {
+
+    //cannot pars song data to json format
+    try {
+        parsedSong = JSON.parse(song);
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+
+    //json doesn't have "name", "duration", "notes" properties
+    if (!( parsedSong.hasOwnProperty("name") &&  parsedSong.hasOwnProperty("duration") &&  parsedSong.hasOwnProperty("notes"))) {
+        console.log("Invalid json format")
+        return false;
+    }
+
+    console.log(parsedSong.notes)
+    console.log(parsedSong.notes.length)
+
+    if( parsedSong.notes.length === 0){
+        console.log("Song doesn't contain any notes")
+        return false;
+    }
+    
+
+    return true;
+}
+
+
+function PlaySong(){
+
+    for(let i =0; i<parsedSong.notes.length; i++){
+       setTimeout(() => {playNote(`${parsedSong.notes[i].key}.mp3`)}, parsedSong.notes[i].startTime)
+    }
+}
+
+//uploading files into prepared section
+uploadSongInput.addEventListener("cancel", function () {
+    console.log("you selected the same file")
+})
+
+
+uploadSongInput.addEventListener("change", function () {
+
+    var reader = new FileReader();
+    reader.readAsText(uploadSongInput.files[0], "UTF-8");
+
+    reader.onerror = function (e) {
+        console.log("error reading the data")
+    }
+
+    //successfully reads file 
+    reader.onload = function (e) {
+        uploadedSongData = e.target.result;
+
+
+       if(CheckJSON(uploadedSongData)){
+             PlaySong();
+       }
+    
+
+    }
+
+})
 
 
 export {
