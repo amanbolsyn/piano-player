@@ -1,4 +1,4 @@
-:root{
+:root {
   --animation-state: running;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .tooltip:nth-of-type(5) .tooltip-text {
-  left: -63%;
+  left: -33%;
 }
 
 
@@ -409,6 +409,7 @@ header label {
 .active-black {
   box-shadow: none;
   transform: scaleY(104%);
+  /* background-color: rgb(96, 96, 96); */
   transform-origin: top;
 }
 
@@ -577,12 +578,13 @@ td:nth-of-type(2) {
   height: max-content;
 }
 
-.interactive-section, .prepared-section {
+.interactive-section,
+.prepared-section {
   padding: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .mode-button {
@@ -600,7 +602,7 @@ td:nth-of-type(2) {
   z-index: 1;
 }
 
-.record-button::after {
+.record-button::after, .play-record-button::after {
   content: "";
   position: absolute;
   width: inherit;
@@ -614,11 +616,11 @@ td:nth-of-type(2) {
   pointer-events: none;
 }
 
-.record-button {
+.record-button, .play-record-button {
   background-color: rgb(255, 59, 59);
 }
 
-.stop-record-button::after {
+.stop-record-button::after{
   content: "";
   position: absolute;
   width: inherit;
@@ -626,7 +628,7 @@ td:nth-of-type(2) {
   border-radius: 50%;
   background-color: rgb(255, 59, 59);
   animation: recording infinite 2.5s;
-  animation-play-state:var(--animation-state);
+  animation-play-state: var(--animation-state);
 }
 
 @keyframes recording {
@@ -643,11 +645,13 @@ td:nth-of-type(2) {
   }
 }
 
-.download-record-button, .upload-record-button {
+.download-record-button,
+.upload-record-button {
   background-color: rgba(34, 18, 255, 0.834);
 }
 
-.download-record-button::after, .upload-record-button::after{
+.download-record-button::after,
+.upload-record-button::after {
   content: "";
   position: absolute;
   width: inherit;
@@ -666,15 +670,20 @@ td:nth-of-type(2) {
 }
 
 .song-input-section {
-  height: 100px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
+.song-input-section form {
+  width: 75%;
+}
+
 .song-input-section input {
-  height: 20px;
+  width: 100%;
+  height: 30px;
   border: none;
   outline: none;
   background-color: #ebf0f1;
@@ -682,15 +691,38 @@ td:nth-of-type(2) {
   padding: 0.5em 0.7em;
   font-size: 0.75em;
   font-weight: 500;
-  flex: 1;
+  box-sizing: border-box;
 }
 
 .song-iput-section a {
   flex: 1;
 }
 
+.song-input-section div {
+  display: flex;
+  width: 75%;
+}
+
+.song-input-section button {
+  height: 30px;
+  flex-grow: 1;
+  border-radius: 0.3em;
+  font-weight: 500;
+  border:none;
+  cursor: pointer;
+}
+
+.song-input-section button:nth-of-type(1){
+  margin-right: 0.3em;
+}
+
+.song-input-section button:nth-of-type(2){
+  margin-left: 0.3em;
+}
+
 .error {
-  margin-top: 0.2em;
+  margin-top: 20px;
+  height: 30px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 0.92em;
   color: red;
@@ -754,14 +786,19 @@ td:nth-of-type(2) {
     background-color: #e4efef;
   }
 
-  .record-button:hover::after {
+  .record-button:hover::after, .play-record-button:hover::after {
     background-color: rgb(234, 24, 24);
     transform: scale(1);
   }
 
-  .download-record-button:hover::after, .upload-record-button:hover::after {
+  .download-record-button:hover::after,
+  .upload-record-button:hover::after {
     background-color: rgba(55, 41, 255, 0.834);
     transform: scale(1);
+  }
+
+  .song-input-section button:hover {
+    background-color: rgb(216, 216, 216);;
   }
 
   .footer p a:hover {

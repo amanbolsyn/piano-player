@@ -192,6 +192,10 @@ function ShowInformationWindow() {
   const informationWindow = document.getElementById("information-window");
   let isShown = localStorage.getItem("show-information");
 
+  if(isShown === null){
+    isShown = "true";
+  }
+
 
   if (isShown === "true") {
     informationChkBox.checked = true;
@@ -238,8 +242,8 @@ function ShowPianoMode(isChecked) {
 
     for (let i = 0; i < 2; i++) {
       preparedSections[i].style.display = "none";
-      interactiveSections[i].style.display = "block";
-      pianoWindowHeadings[i].innerText = "interactive mode"
+      interactiveSections[i].style.display = "flex";
+      pianoWindowHeadings[i].innerText = "record"
 
       recordBttns[i].classList.add("flex");
       recordBttns[i].classList.remove("none");
@@ -252,10 +256,8 @@ function ShowPianoMode(isChecked) {
 
     for (let i = 0; i < 2; i++) {
       interactiveSections[i].style.display = "none"
-      preparedSections[i].style.display = "block"
-      pianoWindowHeadings[i].innerText = "prepared mode"
-
-  
+      preparedSections[i].style.display = "flex"
+      pianoWindowHeadings[i].innerText = "play record"
     }
 
   }

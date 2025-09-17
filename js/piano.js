@@ -26,13 +26,16 @@ const songLink = document.getElementById("song-link");
 const songNameWindow = document.getElementById("song-name-window");
 const songNameForm = document.getElementById("song-name-form");
 const songNameInput = document.getElementById("song-name-input");
-const errorMessage = document.querySelector(".error");
+const errorName = document.querySelectorAll(".name-error");
 let uploadedSongData;
 
 //prepared mode vars
 const uploadSongInput = document.getElementById("upload-song-file");
+const uploadError = document.querySelectorAll(".upload-error");
 let parsedSong;
 
+const uploadRecordBttns = document.querySelectorAll(".upload-record-button")
+const playRecordBttns = document.querySelectorAll(".play-record-button")
 
 
 async function LoadAudioFiles() {
@@ -189,10 +192,15 @@ async function GetSongName() {
                 songNameForm.removeEventListener("submit", ValidateName)
                 songNameWindow.classList.add("hidden");
                 songNameInput.value = "";
-                errorMessage.innerText = "";
+
+                //main and clone error texts
+                errorName[0].innerText = "";
+                errorName[1].innerText = "";
                 resolve();
             } else {
-                errorMessage.innerText = "input valid song name";
+                //main and clone error texts
+                errorName[0].innerText = "invalid song name";
+                errorName[1].innerText = "invalid song name";
             }
 
         }
@@ -204,6 +212,8 @@ async function GetSongName() {
 
 //only changes isRecording boolean var to true i GUESS?
 recordBttns[0].addEventListener("click", function () {
+
+    rootEl.style.setProperty('--animation-state', 'running');//starts animation for record button
 
     for (let i = 0; i < 2; i++) {
         recordBttns[i].classList.add("none");
@@ -252,6 +262,7 @@ downloadRecordBttns[0].addEventListener("click", function () {
     songLink.click();
     URL.revokeObjectURL(songLink.url);
     recordedSong = [];
+    playedNotes = []
 
 })
 
@@ -273,43 +284,66 @@ function exportJSONFile(filename, data) {
 
 function CheckJSON(song) {
 
-    //cannot pars song data to json format
+    //reset text for error message
+    uploadError.innerText = "";
+
+    //cannot parse the song data to json format
     try {
         parsedSong = JSON.parse(song);
     } catch (e) {
-        console.log(e);
+        console.error(e);
+        uploadError[0].innerText = "couldn't parse the file";
+        uploadError[1].innerText = "couldn't parse the file";
         return false;
     }
 
     //json doesn't have "name", "duration", "notes" properties
-    if (!( parsedSong.hasOwnProperty("name") &&  parsedSong.hasOwnProperty("duration") &&  parsedSong.hasOwnProperty("notes"))) {
-        console.log("Invalid json format")
+    if (!(parsedSong.hasOwnProperty("name") && parsedSong.hasOwnProperty("duration") && parsedSong.hasOwnProperty("notes"))) {
+        console.error("invalid json format")
+        uploadError[0].innerText = "invalid json format";
+        uploadError[1].innerText = "invalid json format";
         return false;
     }
 
-    console.log(parsedSong.notes)
-    console.log(parsedSong.notes.length)
-
-    if( parsedSong.notes.length === 0){
-        console.log("Song doesn't contain any notes")
+    //notes array doesn't have any "key" elements to play
+    if (parsedSong.notes.length === 0) {
+        console.error("song doesn't have any notes");
+        uploadError[0].innerText = "song doesn't have any notes";
+        uploadError[1].innerText = "song doesn't have any notes";
         return false;
     }
-    
 
     return true;
 }
 
 
-function PlaySong(){
+function PlaySong() {
 
-    for(let i =0; i<parsedSong.notes.length; i++){
-       setTimeout(() => {playNote(`${parsedSong.notes[i].key}.mp3`)}, parsedSong.notes[i].startTime)
+    for (let i = 0; i < parsedSong.notes.length; i++) {
+
+        let key = parsedSong.notes[i].key;
+        let startTime = parsedSong.notes[i].startTime;
+        const playedElement = document.querySelector(`[data-note="${key}"]`)
+
+
+        setTimeout(() => {
+
+            playNote(`${key}.mp3`)
+            if (playedElement.classList.contains("white-key")) {
+                playedElement.classList.add("active-white")
+                setTimeout(() => { playedElement.classList.remove("active-white") }, 1000);
+            } else if (playedElement.classList.contains("black-key")) {
+                playedElement.classList.add("active-black");
+                setTimeout(() => { playedElement.classList.remove("active-black") }, 1000);
+            }
+
+        }, startTime)
     }
 }
 
-//uploading files into prepared section
+// uploading files into prepared section
 uploadSongInput.addEventListener("cancel", function () {
-    console.log("you selected the same file")
+    console.info("The same file was selected")
 })
 
 
@@ -318,19 +352,26 @@ uploadSongInput.addEventListener("change", function () {
     var reader = new FileReader();
     reader.readAsText(uploadSongInput.files[0], "UTF-8");
 
-    reader.onerror = function (e) {
-        console.log("error reading the data")
+    reader.onerror = function () {
+        console.error("error reading the file")
     }
 
     //successfully reads file 
     reader.onload = function (e) {
         uploadedSongData = e.target.result;
 
+        if (CheckJSON(uploadedSongData)) {
 
-       if(CheckJSON(uploadedSongData)){
-             PlaySong();
-       }
-    
+            for(let i = 0; i < 2; i++) {
+                playRecordBttns[i].classList.add("flex");
+                playRecordBttns[i].classList.remove("none");
+                uploadRecordBttns[i].classList.add("none");
+            }
+
+            playRecordBttns[0].addEventListener("click", function(){
+                PlaySong();
+            })
+        }
 
     }
 

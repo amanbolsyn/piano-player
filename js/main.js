@@ -16,6 +16,7 @@ const infoCloseBttn = document.querySelector(".close-button.information");
 const sheetTables = document.querySelectorAll(".window-container.sheet-table");
 const windowContainers = document.querySelectorAll(".window-container")
 const pianoModeWindow = document.getElementById("piano-mode-window")
+const songNameWindow = document.getElementById("song-name-window")
 
 
 
@@ -23,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     //handels event listenners to each black and white key 
     KeyListeners();
-    await LoadAudioFiles()
 
     //controls z index level of window containers when clicked 
     //makes window container to move forward whenc clicked
@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     PianoModeToggle();
     ClosePianoModeWindow();
+
+     await LoadAudioFiles()
 
     //note sheets window logic
     NoteSheets();
@@ -68,15 +70,18 @@ document.addEventListener("DOMContentLoaded", async function () {
             CloseInformationWindow();
         }
 
-        //remove all inline styles of window containers if screen width is lesss then 600 pixels
+        //remove all inline styles of window containers if screen width is less then 600 pixels
         if (this.innerWidth < 600) {
             for (const windowContainer of windowContainers) {
                 windowContainer.removeAttribute("style");
+                console.log(windowContainer)
             }
         }
 
-        //remove all inline styles of piano mode window every time when screen resizes
+        //remove all inline styles of piano mode window and song name window every time when screen resizes
         pianoModeWindow.removeAttribute("style");
+        songNameWindow.removeAttribute("style");
+
     })
 });
 
