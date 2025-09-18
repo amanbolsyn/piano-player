@@ -3,8 +3,9 @@ if (selectedMode === null) {
     selectedMode = "prepared";
 }
 
-let isRecording = false;
-let recordedSong = [], playedNotes = [];
+export let isRecording = false;
+export let recordedSong = []
+export let playedNotes = [];
 let recordStartTime, recordDuration, recordName;
 const audioFiles = ["A3.mp3", "A4.mp3", "Ab3.mp3", "Ab4.mp3", "B3.mp3", "B4.mp3", "Bb3.mp3", "Bb4.mp3", "C3.mp3",
     "C4.mp3", "C5.mp3", "D3.mp3", "D4.mp3", "D5.mp3", "Db3.mp3", "Db4.mp3", "Db5.mp3", "E3.mp3", "E4.mp3", "E5.mp3",
@@ -34,9 +35,15 @@ const uploadSongInput = document.getElementById("upload-song-file");
 const uploadError = document.querySelectorAll(".upload-error");
 let parsedSong;
 
-const uploadRecordBttns = document.querySelectorAll(".upload-record-button")
-const playRecordBttns = document.querySelectorAll(".play-record-button")
+const uploadRecordBttns = document.querySelectorAll("label>.upload-record-button");
+const playRecordBttns = document.querySelectorAll(".play-record-button");
+const pauseRecordBttns = document.querySelectorAll(".pause-record-button");
+const playbackUpload = document.querySelectorAll(".playback-section>.upload-record-button")
 
+
+// song name window vars 
+const closeSongWindow = document.getElementById("song-name-close");
+const saveSongNameBttn = document.getElementById("song-name-save");
 
 async function LoadAudioFiles() {
     for (const file of audioFiles) {
@@ -161,6 +168,33 @@ function RecordNote(note, time, duration) {
     playedNotes.push(playedNote);
 }
 
+//resets interactive mode to its default state
+function ResetInteractiveMode() {
+
+    for (let i = 0; i < 2; i++) {
+        recordBttns[i].classList.add("flex");
+        recordBttns[i].classList.remove("none")
+
+        stopRecordBttns[i].classList.remove("flex");
+        stopRecordBttns[i].classList.add("none")
+
+        downloadRecordBttns[i].classList.remove("flex");
+        downloadRecordBttns[i].classList.add("none")
+    }
+
+
+    songNameWindow.classList.add("hidden");
+    isRecording = false;
+    playedNotes = [];
+    recordedSong = [];
+}
+
+//resets prepared mode to its default state 
+function ResetPreparedMode() {
+
+}
+
+
 
 function playNote(file) {
 
@@ -204,7 +238,9 @@ async function GetSongName() {
             }
 
         }
+
         songNameForm.addEventListener("submit", ValidateName);
+        saveSongNameBttn.addEventListener("click", ValidateName);
 
     });
 }
@@ -253,17 +289,9 @@ stopRecordBttns[0].addEventListener("click", async function () {
 //can download only once and changes it state to recrod again
 downloadRecordBttns[0].addEventListener("click", function () {
 
-    for (let i = 0; i < 2; i++) {
-        downloadRecordBttns[i].classList.add("none");
-        recordBttns[i].classList.remove("none")
-        recordBttns[i].classList.add("flex");
-    }
-
     songLink.click();
     URL.revokeObjectURL(songLink.url);
-    recordedSong = [];
-    playedNotes = []
-
+    ResetInteractiveMode();
 })
 
 function exportJSONFile(filename, data) {
@@ -362,23 +390,52 @@ uploadSongInput.addEventListener("change", function () {
 
         if (CheckJSON(uploadedSongData)) {
 
-            for(let i = 0; i < 2; i++) {
+            for (let i = 0; i < 2; i++) {
+                uploadRecordBttns[i].classList.add("none");          
+
                 playRecordBttns[i].classList.add("flex");
                 playRecordBttns[i].classList.remove("none");
-                uploadRecordBttns[i].classList.add("none");
+
+                playbackUpload[i].classList.add("flex");
+                playbackUpload[i].classList.remove("none");
+
             }
 
-            playRecordBttns[0].addEventListener("click", function(){
-                PlaySong();
-            })
         }
 
     }
 
 })
 
+playRecordBttns[0].addEventListener("click", function () {
+    PlaySong();
+
+    //display pause buttons
+    for (let i = 0; i < 2; i++) {
+        pauseRecordBttns[i].classList.remove("none");
+        pauseRecordBttns[i].classList.add("flex");
+
+        playRecordBttns[i].classList.add("none")
+        playRecordBttns[i].classList.remove("flex")
+    }
+})
+
+pauseRecordBttns[0].addEventListener("click", function () {
+
+    for (let i = 0; i < 2; i++) {
+        pauseRecordBttns[i].classList.add("none")
+        pauseRecordBttns[i].classList.remove("flex");
+
+        playRecordBttns[i].classList.add("flex");
+        playRecordBttns[i].classList.remove("none");
+
+    }
+})
+
 
 export {
     KeyListeners,
-    LoadAudioFiles
+    LoadAudioFiles,
+    ResetInteractiveMode,
+    ResetPreparedMode
 }

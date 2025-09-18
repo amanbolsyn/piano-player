@@ -474,7 +474,7 @@ header label {
   background-color: red;
 }
 
-.window-heading div:nth-of-type(1) svg {
+.window-heading div:nth-of-type(1) img {
   display: none;
   padding-left: 0.7px;
   padding-top: 1.9px;
@@ -598,11 +598,12 @@ td:nth-of-type(2) {
   cursor: pointer;
 }
 
-.mode-button svg {
+.mode-button img {
   z-index: 1;
 }
 
-.record-button::after, .play-record-button::after {
+.record-button::after,
+.play-record-button::after {
   content: "";
   position: absolute;
   width: inherit;
@@ -616,11 +617,13 @@ td:nth-of-type(2) {
   pointer-events: none;
 }
 
-.record-button, .play-record-button {
+.record-button,
+.play-record-button,
+.pause-record-button {
   background-color: rgb(255, 59, 59);
 }
 
-.stop-record-button::after{
+.stop-record-button::after {
   content: "";
   position: absolute;
   width: inherit;
@@ -650,6 +653,10 @@ td:nth-of-type(2) {
   background-color: rgba(34, 18, 255, 0.834);
 }
 
+.upload-record-button {
+  margin-bottom: 10px;
+}
+
 .download-record-button::after,
 .upload-record-button::after {
   content: "";
@@ -662,6 +669,22 @@ td:nth-of-type(2) {
 
   transition: transform 1s ease, background-color 0.5s ease;
   pointer-events: none;
+}
+
+
+.playback-section {
+  width: 80%;
+  display: flex;
+  justify-content:space-evenly;
+}
+
+.playback-section .mode-button {
+  width: 50px;
+  height: 50px;
+}
+
+.playback-section .upload-record-button {
+  margin: 0;
 }
 
 #song-name-window {
@@ -708,15 +731,15 @@ td:nth-of-type(2) {
   flex-grow: 1;
   border-radius: 0.3em;
   font-weight: 500;
-  border:none;
+  border: none;
   cursor: pointer;
 }
 
-.song-input-section button:nth-of-type(1){
+.song-input-section button:nth-of-type(1) {
   margin-right: 0.3em;
 }
 
-.song-input-section button:nth-of-type(2){
+.song-input-section button:nth-of-type(2) {
   margin-left: 0.3em;
 }
 
@@ -727,6 +750,7 @@ td:nth-of-type(2) {
   font-size: 0.92em;
   color: red;
 }
+
 
 .prepared-section input {
   display: none;
@@ -773,7 +797,7 @@ td:nth-of-type(2) {
     background-color: rgb(216, 216, 216);
   }
 
-  .window-heading div:nth-of-type(1):hover svg {
+  .window-heading div:nth-of-type(1):hover img {
     display: block;
   }
 
@@ -786,7 +810,8 @@ td:nth-of-type(2) {
     background-color: #e4efef;
   }
 
-  .record-button:hover::after, .play-record-button:hover::after {
+  .record-button:hover::after,
+  .play-record-button:hover::after {
     background-color: rgb(234, 24, 24);
     transform: scale(1);
   }
@@ -798,7 +823,8 @@ td:nth-of-type(2) {
   }
 
   .song-input-section button:hover {
-    background-color: rgb(216, 216, 216);;
+    background-color: rgb(216, 216, 216);
+    ;
   }
 
   .footer p a:hover {

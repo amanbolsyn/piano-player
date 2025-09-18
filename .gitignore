@@ -1,2 +1,5 @@
 /.vscode
 /tasks
+/eslint.config.mjs
+/node_modules/
+/package-lock.json

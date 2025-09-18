@@ -1,0 +1,16 @@
+{
+  "name": "piano-player",
+  "version": "1.0.0",
+  "description": "Browser application piano player:",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aman Nurgozhiyev",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "eslint": "^9.35.0",
+    "globals": "^16.4.0"
+  }
+}
