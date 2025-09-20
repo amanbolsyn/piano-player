@@ -587,7 +587,7 @@ td:nth-of-type(2) {
   flex-direction: column;
 }
 
-.prepared-section input {
+#upload-song-file {
   display: none;
 }
 
@@ -625,7 +625,7 @@ td:nth-of-type(2) {
 .record-button,
 .play-record-button,
 .pause-record-button,
-.playback-section .stop-record-button{
+.playback-section .stop-record-button {
   background-color: rgb(255, 59, 59);
 }
 
@@ -681,7 +681,13 @@ td:nth-of-type(2) {
 .playback-section {
   width: 90%;
   display: flex;
-  justify-content:space-evenly;
+  flex-direction: column;
+}
+
+.playback-section .play-controls {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
 }
 
 .playback-section .mode-button {
@@ -694,8 +700,30 @@ td:nth-of-type(2) {
 }
 
 .playback-section .stop-record-button::after {
-  animation:none;
+  animation: none;
 }
+
+.volume-control,
+.speed-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+.volume-control label,
+.speed-control label {
+  height: 24px;
+  width: 24px;
+  background-color: rgb(255, 59, 59);
+  padding: 0.2em;
+  border-radius: 50%;
+}
+
+.speed-control label {
+  padding: 0.2em 0.1em 0.1em 0.2em
+}
+
 
 #song-name-window {
   top: 60%;

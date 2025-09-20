@@ -1,10 +1,3 @@
-//DOM vars
-
-//interactive mode buttons
-const recordBttns = document.querySelectorAll(".record-button");
-const stopRecordBttns = document.querySelectorAll(".interactive-section>.stop-record-button");
-const downloadRecordBttns = document.querySelectorAll(".download-record-button");
-
 //helps to determine z index level of opened/clicked windows
 let zLevel = 4;
 

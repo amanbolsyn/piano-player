@@ -5,16 +5,18 @@ if (selectedMode === null) {
     selectedMode = "prepared";
 }
 
-export let isRecording = false;
-export let recordedSong = []
-export let playedNotes = [];
+let isRecording = false; //program knows does it have to record or not
+let recordedSong = [] //stores song name, duration and notes
+let playedNotes = []; //stores only played notes
+let playTimeoutIds = [];
+
 let recordStartTime, recordDuration, recordName;
+
 const audioFiles = ["A3.mp3", "A4.mp3", "Ab3.mp3", "Ab4.mp3", "B3.mp3", "B4.mp3", "Bb3.mp3", "Bb4.mp3", "C3.mp3",
     "C4.mp3", "C5.mp3", "D3.mp3", "D4.mp3", "D5.mp3", "Db3.mp3", "Db4.mp3", "Db5.mp3", "E3.mp3", "E4.mp3", "E5.mp3",
     "Eb3.mp3", "Eb4.mp3", "Eb5.mp3", "F3.mp3", "F4.mp3", "G3.mp3", "G4.mp3", "Gb3.mp3", "Gb4.mp3"
-]
+] //what files to fetch
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const bufferFiles = [];
 
 const rootEl = document.querySelector(":root");
@@ -43,9 +45,9 @@ const playRecordBttns = document.querySelectorAll(".play-record-button");
 const pauseRecordBttns = document.querySelectorAll(".pause-record-button");
 
 const playbackSection = document.querySelectorAll(".playback-section");
-const playbackUpload = document.querySelectorAll(".playback-section>.upload-record-button");
-const playbackStop = document.querySelectorAll(".playback-section>.stop-record-button");
-
+const playbackUpload = document.querySelectorAll(".play-controls>.upload-record-button");
+const playbackStop = document.querySelectorAll(".play-controls>.stop-record-button");
+const playbackVolume = document.getElementById("volume");
 
 const closePianoModeBttn = document.querySelector("#piano-mode-window .close-button");
 
@@ -303,24 +305,37 @@ function ResetPreparedMode() {
         uploadError[i].innerText = ""
     }
 
+    //stop recording
+    StopRecord();
     playbackStop[0].removeEventListener("click", StopRecord)
     uploadSongInput.value = "";
-
-    //stop recording
+    playTimeoutIds = [];
 
 }
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const globalGainNode = audioCtx.createGain();
+globalGainNode.gain.value = playbackVolume.value / 100; // initial volume
+globalGainNode.connect(audioCtx.destination);
+
+// Setup volume control ONCE
+playbackVolume.addEventListener("change", function () {
+    globalGainNode.gain.value = playbackVolume.value / 100;
+});
 
 function playNote(file) {
 
     const source = audioCtx.createBufferSource();
     source.buffer = bufferFiles[file];
 
+    // Create a GainNode
+    source.connect(globalGainNode);
+
     if (isRecording) {
         let keyPressTime = Date.now() - recordStartTime;
         RecordNote(file.slice(0, -4), keyPressTime, bufferFiles[file].duration);
     }
 
-    source.connect(audioCtx.destination);
     source.start();
 
 }
@@ -491,7 +506,7 @@ function PlaySong() {
         const playedElement = document.querySelector(`[data-note="${key}"]`)
 
 
-        setTimeout(() => {
+        let timeoutId = setTimeout(() => {
 
             playNote(`${key}.mp3`)
             if (playedElement.classList.contains("white-key")) {
@@ -503,6 +518,8 @@ function PlaySong() {
             }
 
         }, startTime)
+
+        playTimeoutIds.push(timeoutId);
     }
 }
 
@@ -542,6 +559,16 @@ uploadSongInput.addEventListener("change", function () {
 
 function StopRecord() {
 
+    for (let i = 0; i < playTimeoutIds.length; i++) {
+        clearTimeout(playTimeoutIds[i]);
+    }
+
+    for (let i = 0; i < 2; i++) {
+        pauseRecordBttns[i].classList.add("none")
+        playRecordBttns[i].classList.remove("none");
+    }
+
+    playbackStop[0].removeEventListener("click", StopRecord);
 }
 
 playRecordBttns[0].addEventListener("click", function () {
@@ -550,7 +577,6 @@ playRecordBttns[0].addEventListener("click", function () {
     //display pause buttons
     for (let i = 0; i < 2; i++) {
         pauseRecordBttns[i].classList.remove("none");
-
         playRecordBttns[i].classList.add("none")
     }
 
@@ -561,11 +587,10 @@ playRecordBttns[0].addEventListener("click", function () {
 
 pauseRecordBttns[0].addEventListener("click", function () {
 
+    //display play button
     for (let i = 0; i < 2; i++) {
         pauseRecordBttns[i].classList.add("none")
-
         playRecordBttns[i].classList.remove("none");
-
     }
 
     playbackStop[0].removeEventListener("click", StopRecord);
@@ -574,6 +599,7 @@ pauseRecordBttns[0].addEventListener("click", function () {
 playbackUpload[0].addEventListener("click", function () {
     ResetPreparedMode();
 })
+
 
 
 
