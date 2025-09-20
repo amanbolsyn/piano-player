@@ -244,5 +244,4 @@ export {
   ShowInformationWindow,
   CloseInformationWindow,
   WindowZLevel,
-  zLevel
 };

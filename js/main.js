@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (this.innerWidth < 600) {
             for (const windowContainer of windowContainers) {
                 windowContainer.removeAttribute("style");
-                console.log(windowContainer)
             }
         }
 

@@ -573,8 +573,8 @@
             <input type="range" id="volume" name="volume" min="0" max="100" step="1" value = "50">
           </div>
           <div class="speed-control">
-            <label for="speed"><img src = "assets/icons/prepared-section/speed-control-icon.svg" alt = "speed control icon"></label>
-            <input type="range" id="speed" name="speed" min="0.5" max="1.5" step="0.5">
+            <label for="speed"><img src = "./assets/icons/prepared-section/speed-control-icon.svg" alt = "speed control icon"></label>
+            <input type="range" id="speed" name="speed" min="1" max="2" step="0.5" value = "1">
           </div>
 
       </section>
@@ -610,28 +610,29 @@
           <a class="error upload-error "></a>
         </label>
         <div class="playback-section none">
-          <div class="mode-button upload-record-button flex">
-            <img src="./assets/icons/prepared-section/import-icon-2.svg" alt="upload icon">
-          </div>
-          <div class="mode-button play-record-button flex">
-            <img src="./assets/icons/prepared-section/play-icon.svg" alt="play icon">
-          </div>
-          <div class="mode-button pause-record-button flex none">
-            <img src="./assets/icons/prepared-section/pause-icon.svg" alt="pause-icon">
-          </div>
-          <div class="mode-button stop-record-button flex">
-            <img src="./assets/icons/prepared-section/stop-icon.svg" alt="pause-icon">
-          </div>
-          <div>
-            <div class="flex">
-              <input type="range" name="volume" min="0" max="100" step="5">
+          <div class = "play-controls">
+            <div class="mode-button upload-record-button flex">
+              <img src="./assets/icons/prepared-section/import-icon-2.svg" alt="upload icon">
             </div>
-            <div class="">
-              <input type="range" name="speed" min="0.5" max="2" step="0.5">
+            <div class="mode-button play-record-button flex">
+              <img src="./assets/icons/prepared-section/play-icon.svg" alt="play icon">
             </div>
+            <div class="mode-button pause-record-button flex none">
+              <img src="./assets/icons/prepared-section/pause-icon.svg" alt="pause-icon">
+            </div>
+            <div class="mode-button stop-record-button flex" disabled>
+              <img src="./assets/icons/prepared-section/stop-icon.svg" alt="pause-icon">
+            </div>
+          </div>
+          <div class="volume-control">
+            <label><img src = "./assets/icons/prepared-section/volume-control-icon.svg" alt = "volume control icon"></label>
+            <input type="range"  name="volume" min="0" max="100" step="1" value = "50">
+          </div>
+          <div class="speed-control">
+            <label><img src = "./assets/icons/prepared-section/speed-control-icon.svg" alt = "speed control icon"></label>
+            <input type="range" name="speed" min="1" max="2" step="0.5" value ="1">
           </div>
 
-        </div>
       </section>
     </div>
 

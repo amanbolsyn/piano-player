@@ -48,6 +48,7 @@ const playbackSection = document.querySelectorAll(".playback-section");
 const playbackUpload = document.querySelectorAll(".play-controls>.upload-record-button");
 const playbackStop = document.querySelectorAll(".play-controls>.stop-record-button");
 const playbackVolume = document.getElementById("volume");
+const playbackSpeed = document.getElementById("speed")
 
 const closePianoModeBttn = document.querySelector("#piano-mode-window .close-button");
 
@@ -325,10 +326,15 @@ playbackVolume.addEventListener("input", function () {
     globalGainNode.gain.value = playbackVolume.value / 100;
 });
 
+playbackSpeed.addEventListener("change", function(){
+    StopRecord();
+})
+
 function playNote(file) {
 
     const source = audioCtx.createBufferSource();
     source.buffer = bufferFiles[file];
+    source.playbackRate.value = playbackSpeed.value;
 
     // Create a GainNode
     source.connect(globalGainNode);
@@ -519,10 +525,19 @@ function PlaySong() {
                 setTimeout(() => { playedElement.classList.remove("active-black") }, 1000);
             }
 
-        }, startTime)
+        }, startTime/playbackSpeed.value)
 
         playTimeoutIds.push(timeoutId);
     }
+
+    let timeoutId = setTimeout(() => {
+        for (let i = 0; i < 2; i++) {
+            pauseRecordBttns[i].classList.add("none")
+            playRecordBttns[i].classList.remove("none");
+        }
+    }, parsedSong.duration/playbackSpeed.value)
+
+    playTimeoutIds.push(timeoutId);
 }
 
 // uploading files into prepared section
@@ -570,6 +585,7 @@ function StopRecord() {
         playRecordBttns[i].classList.remove("none");
     }
 
+    playTimeoutIds = []
     playbackStop[0].removeEventListener("click", StopRecord);
 }
 
