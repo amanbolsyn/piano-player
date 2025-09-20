@@ -319,7 +319,7 @@ globalGainNode.gain.value = playbackVolume.value / 100; // initial volume
 globalGainNode.connect(audioCtx.destination);
 
 // Setup volume control ONCE
-playbackVolume.addEventListener("change", function () {
+playbackVolume.addEventListener("input", function () {
     globalGainNode.gain.value = playbackVolume.value / 100;
 });
 
