@@ -2,9 +2,8 @@
 
 //interactive mode buttons
 const recordBttns = document.querySelectorAll(".record-button");
-const stopRecordBttns = document.querySelectorAll(".stop-record-button");
+const stopRecordBttns = document.querySelectorAll(".interactive-section>.stop-record-button");
 const downloadRecordBttns = document.querySelectorAll(".download-record-button");
-
 
 //helps to determine z index level of opened/clicked windows
 let zLevel = 4;
@@ -231,108 +230,6 @@ function CloseInformationWindow() {
 
 }
 
-function ShowPianoMode(isChecked) {
-
-  const interactiveSections = document.querySelectorAll(".interactive-section");
-  const preparedSections = document.querySelectorAll(".prepared-section")
-  const pianoWindowHeadings = document.querySelectorAll(".piano-window-heading");
-  const pianoModeWindow = document.getElementById("piano-mode-window")
-
-  if (!isChecked) {//interactive section
-
-    for (let i = 0; i < 2; i++) {
-      preparedSections[i].style.display = "none";
-      interactiveSections[i].style.display = "flex";
-      pianoWindowHeadings[i].innerText = "record"
-
-      recordBttns[i].classList.add("flex");
-      recordBttns[i].classList.remove("none");
-      stopRecordBttns[i].classList.add("none");
-      downloadRecordBttns[i].classList.add("none");
-
-    }
-
-  } else if (isChecked) {//prepared section
-
-    for (let i = 0; i < 2; i++) {
-      interactiveSections[i].style.display = "none"
-      preparedSections[i].style.display = "flex"
-      pianoWindowHeadings[i].innerText = "play record"
-    }
-
-  }
-
-  //automatically close info window during mode switch on mobile phones
-  if (window.innerWidth < 650 || window.innerHeight < 500) {
-    CloseInformationWindow();
-  }
-
-  pianoModeWindow.style.zIndex = zLevel;
-  zLevel++;
-
-
-}
-
-
-function PianoModeToggle() {
-
-  const interactive = document.getElementById("interactive-mode");
-  const prepared = document.getElementById("prepared-mode");
-  let selectedMode = localStorage.getItem("piano-mode")
-
-
-  if (selectedMode === null) {
-    localStorage.setItem("piano-mode", "prepared");
-    selectedMode = localStorage.getItem("piano-mode")
-  }
-
-  if (selectedMode === "interactive") { //interactive mode 
-    ShowPianoMode(false)
-    interactive.checked = true;
-  } else if (selectedMode === "prepared") { //prepared mode
-    ShowPianoMode(true)
-    prepared.checked = true;
-  }
-
-  interactive.addEventListener("change", function () {
-    localStorage.setItem("piano-mode", "interactive");
-    ShowPianoMode(false);
-  })
-
-  prepared.addEventListener("change", function () {
-
-    localStorage.setItem("piano-mode", "prepared");
-    ShowPianoMode(true);
-  })
-
-}
-
-
-//close button functionality on piano mode window
-function ClosePianoModeWindow() {
-
-  const pianoModeWindow = document.getElementById("piano-mode-window")
-  const closePianoModeBttn = pianoModeWindow.querySelector(".close-button");
-  const interactive = document.getElementById("interactive-mode");
-  const prepared = document.getElementById("prepared-mode");
-
-  closePianoModeBttn.addEventListener("click", function () {
-    let selectedMode = localStorage.getItem("piano-mode");
-
-    //swich window modes based on a current selected mode
-    if (selectedMode === "interactive") {
-      ShowPianoMode(true);
-      localStorage.setItem("piano-mode", "prepared")
-      prepared.checked = true
-    } else if (selectedMode === "prepared") {
-      ShowPianoMode(false);
-      localStorage.setItem("piano-mode", "interactive")
-      interactive.checked = true
-    }
-
-  })
-}
-
 
 function WindowZLevel() {
   const windows = document.querySelectorAll(".window-container")
@@ -353,7 +250,6 @@ export {
   CloseSheetWindow,
   ShowInformationWindow,
   CloseInformationWindow,
-  PianoModeToggle,
-  ClosePianoModeWindow,
-  WindowZLevel
+  WindowZLevel,
+  zLevel
 };

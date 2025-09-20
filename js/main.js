@@ -1,13 +1,14 @@
 import { KeyListeners} from "./piano.js"
 import {LoadAudioFiles } from "./piano.js"
+import { PianoModeToggle } from "./piano.js";
+import { ClosePianoModeWindow } from "./piano.js";
+
 import { NoteHints } from "./utils.js";
 import { NoteSheets } from "./utils.js";
 import { ApplyDragEvent } from "./utils.js";
 import { CloseSheetWindow } from "./utils.js";
 import { ShowInformationWindow } from "./utils.js";
 import { CloseInformationWindow } from "./utils.js";
-import { PianoModeToggle } from "./utils.js";
-import { ClosePianoModeWindow } from "./utils.js";
 import { WindowZLevel } from "./utils.js";
 
 

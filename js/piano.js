@@ -1,3 +1,5 @@
+import { CloseInformationWindow } from "./utils.js";
+
 let selectedMode = localStorage.getItem("piano-mode");
 if (selectedMode === null) {
     selectedMode = "prepared";
@@ -19,7 +21,7 @@ const rootEl = document.querySelector(":root");
 
 //interactive mode vars
 const recordBttns = document.querySelectorAll(".record-button");
-const stopRecordBttns = document.querySelectorAll(".stop-record-button");
+const stopRecordBttns = document.querySelectorAll(".interactive-section>.stop-record-button");
 const downloadRecordBttns = document.querySelectorAll(".download-record-button");
 
 const songLink = document.getElementById("song-link");
@@ -31,6 +33,7 @@ const errorName = document.querySelectorAll(".name-error");
 let uploadedSongData;
 
 //prepared mode vars
+const uploadSection = document.querySelectorAll(".upload-section");
 const uploadSongInput = document.getElementById("upload-song-file");
 const uploadError = document.querySelectorAll(".upload-error");
 let parsedSong;
@@ -38,8 +41,13 @@ let parsedSong;
 const uploadRecordBttns = document.querySelectorAll("label>.upload-record-button");
 const playRecordBttns = document.querySelectorAll(".play-record-button");
 const pauseRecordBttns = document.querySelectorAll(".pause-record-button");
-const playbackUpload = document.querySelectorAll(".playback-section>.upload-record-button")
 
+const playbackSection = document.querySelectorAll(".playback-section");
+const playbackUpload = document.querySelectorAll(".playback-section>.upload-record-button");
+const playbackStop = document.querySelectorAll(".playback-section>.stop-record-button");
+
+
+const closePianoModeBttn = document.querySelector("#piano-mode-window .close-button");
 
 // song name window vars 
 const closeSongWindow = document.getElementById("song-name-close");
@@ -52,6 +60,106 @@ async function LoadAudioFiles() {
         const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
         bufferFiles[file] = audioBuffer;
     }
+}
+
+function ShowPianoMode(isChecked) {
+
+    const interactiveSections = document.querySelectorAll(".interactive-section");
+    const preparedSections = document.querySelectorAll(".prepared-section")
+    const pianoWindowHeadings = document.querySelectorAll(".piano-window-heading");
+
+    if (!isChecked) {//interactive section
+
+        for (let i = 0; i < 2; i++) {
+            preparedSections[i].style.display = "none";
+            interactiveSections[i].style.display = "flex";
+            pianoWindowHeadings[i].innerText = "record";
+
+            ResetPreparedMode();
+        }
+
+    } else if (isChecked) {//prepared section
+
+        for (let i = 0; i < 2; i++) {
+            interactiveSections[i].style.display = "none"
+            preparedSections[i].style.display = "flex"
+            pianoWindowHeadings[i].innerText = "play record";
+
+            ResetInteractiveMode();
+        }
+
+    }
+
+    //automatically close info window during mode switch on mobile phones
+    if (window.innerWidth < 650 || window.innerHeight < 500) {
+        CloseInformationWindow();
+    }
+
+    // pianoModeWindow.style.zIndex = zLevel.index;
+    // zLevel.index++;
+
+
+}
+
+
+function PianoModeToggle() {
+
+    const interactive = document.getElementById("interactive-mode");
+    const prepared = document.getElementById("prepared-mode");
+    let selectedMode = localStorage.getItem("piano-mode")
+
+
+    if (selectedMode === null) {
+        localStorage.setItem("piano-mode", "prepared");
+        selectedMode = localStorage.getItem("piano-mode")
+    }
+
+    if (selectedMode === "interactive") { //interactive mode 
+        ShowPianoMode(false)
+        interactive.checked = true;
+        ResetInteractiveMode();
+
+    } else if (selectedMode === "prepared") { //prepared mode
+        ShowPianoMode(true)
+        prepared.checked = true;
+    }
+
+    interactive.addEventListener("change", function () {
+        localStorage.setItem("piano-mode", "interactive");
+        ShowPianoMode(false);
+    })
+
+    prepared.addEventListener("change", function () {
+
+        localStorage.setItem("piano-mode", "prepared");
+        ShowPianoMode(true);
+    })
+
+}
+
+
+//close button functionality on piano mode window
+function ClosePianoModeWindow() {
+
+    const interactive = document.getElementById("interactive-mode");
+    const prepared = document.getElementById("prepared-mode");
+
+    closePianoModeBttn.addEventListener("click", function () {
+        let selectedMode = localStorage.getItem("piano-mode");
+
+        //swich window modes based on a current selected mode
+        if (selectedMode === "interactive") {
+            ShowPianoMode(true);
+            localStorage.setItem("piano-mode", "prepared")
+            prepared.checked = true
+        } else if (selectedMode === "prepared") {
+            ShowPianoMode(false);
+            localStorage.setItem("piano-mode", "interactive")
+            interactive.checked = true
+            ResetPreparedMode()
+        }
+
+    })
 }
 
 function KeyListeners() {
@@ -172,18 +280,11 @@ function RecordNote(note, time, duration) {
 function ResetInteractiveMode() {
 
     for (let i = 0; i < 2; i++) {
-        recordBttns[i].classList.add("flex");
         recordBttns[i].classList.remove("none")
-
-        stopRecordBttns[i].classList.remove("flex");
         stopRecordBttns[i].classList.add("none")
-
-        downloadRecordBttns[i].classList.remove("flex");
         downloadRecordBttns[i].classList.add("none")
     }
 
-
-    songNameWindow.classList.add("hidden");
     isRecording = false;
     playedNotes = [];
     recordedSong = [];
@@ -191,10 +292,23 @@ function ResetInteractiveMode() {
 
 //resets prepared mode to its default state 
 function ResetPreparedMode() {
+    for (let i = 0; i < 2; i++) {
+
+        uploadSection[i].classList.remove("none")
+        playbackSection[i].classList.add("none");
+
+        playRecordBttns[i].classList.remove("none")
+        pauseRecordBttns[i].classList.add("none");
+
+        uploadError[i].innerText = ""
+    }
+
+    playbackStop[0].removeEventListener("click", StopRecord)
+    uploadSongInput.value = "";
+
+    //stop recording
 
 }
-
-
 
 function playNote(file) {
 
@@ -215,7 +329,7 @@ async function GetSongName() {
 
     songNameWindow.classList.remove("hidden");
 
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
 
         function ValidateName(e) {
             e.preventDefault();
@@ -223,14 +337,10 @@ async function GetSongName() {
             recordName = songNameInput.value.trim();
 
             if (recordName !== "") {
-                songNameForm.removeEventListener("submit", ValidateName)
-                songNameWindow.classList.add("hidden");
-                songNameInput.value = "";
 
-                //main and clone error texts
-                errorName[0].innerText = "";
-                errorName[1].innerText = "";
+                CleanUp();
                 resolve();
+
             } else {
                 //main and clone error texts
                 errorName[0].innerText = "invalid song name";
@@ -239,8 +349,29 @@ async function GetSongName() {
 
         }
 
+        function CleanUp() {
+
+            songNameWindow.classList.add("hidden");
+            songNameInput.value = "";
+
+            errorName[0].innerText = "";
+            errorName[1].innerText = "";
+
+            songNameForm.removeEventListener("submit", ValidateName);
+            saveSongNameBttn.removeEventListener("click", ValidateName);
+            closePianoModeBttn.removeEventListener("click", CancelPromise);
+
+        }
+
+        function CancelPromise() {
+
+            CleanUp();
+            reject(new Error("song name was not taken"))
+        }
+
         songNameForm.addEventListener("submit", ValidateName);
         saveSongNameBttn.addEventListener("click", ValidateName);
+        closePianoModeBttn.addEventListener("click", CancelPromise)
 
     });
 }
@@ -255,7 +386,6 @@ recordBttns[0].addEventListener("click", function () {
         recordBttns[i].classList.add("none");
         stopRecordBttns[i].classList.remove("none");
         stopRecordBttns[i].classList.add("flex");
-
     }
 
     recordStartTime = Date.now();
@@ -267,12 +397,18 @@ stopRecordBttns[0].addEventListener("click", async function () {
 
     recordDuration = Date.now() - recordStartTime;
     rootEl.style.setProperty('--animation-state', 'paused');//stops animation for stop button
-    await GetSongName();
+    isRecording = false;
+
+    try {
+        await GetSongName();
+    } catch (err) {
+        console.log(err)
+        return;
+    }
 
     for (let i = 0; i < 2; i++) {
         stopRecordBttns[i].classList.add("none");
         downloadRecordBttns[i].classList.remove("none");
-        downloadRecordBttns[i].classList.add("flex");
     }
 
     recordedSong = {
@@ -281,8 +417,8 @@ stopRecordBttns[0].addEventListener("click", async function () {
         "notes": playedNotes,
     }
 
-    isRecording = false;
     exportJSONFile(recordedSong.name, recordedSong)
+
 })
 
 
@@ -293,6 +429,7 @@ downloadRecordBttns[0].addEventListener("click", function () {
     URL.revokeObjectURL(songLink.url);
     ResetInteractiveMode();
 })
+
 
 function exportJSONFile(filename, data) {
     // Step 1: Convert the JavaScript object to a JSON string
@@ -391,13 +528,9 @@ uploadSongInput.addEventListener("change", function () {
         if (CheckJSON(uploadedSongData)) {
 
             for (let i = 0; i < 2; i++) {
-                uploadRecordBttns[i].classList.add("none");          
 
-                playRecordBttns[i].classList.add("flex");
-                playRecordBttns[i].classList.remove("none");
-
-                playbackUpload[i].classList.add("flex");
-                playbackUpload[i].classList.remove("none");
+                uploadSection[i].classList.add("none");
+                playbackSection[i].classList.remove("none");
 
             }
 
@@ -407,35 +540,48 @@ uploadSongInput.addEventListener("change", function () {
 
 })
 
+function StopRecord() {
+
+}
+
 playRecordBttns[0].addEventListener("click", function () {
     PlaySong();
 
     //display pause buttons
     for (let i = 0; i < 2; i++) {
         pauseRecordBttns[i].classList.remove("none");
-        pauseRecordBttns[i].classList.add("flex");
 
         playRecordBttns[i].classList.add("none")
-        playRecordBttns[i].classList.remove("flex")
     }
+
+
+    playbackStop[0].addEventListener("click", StopRecord);
+
 })
 
 pauseRecordBttns[0].addEventListener("click", function () {
 
     for (let i = 0; i < 2; i++) {
         pauseRecordBttns[i].classList.add("none")
-        pauseRecordBttns[i].classList.remove("flex");
 
-        playRecordBttns[i].classList.add("flex");
         playRecordBttns[i].classList.remove("none");
 
     }
+
+    playbackStop[0].removeEventListener("click", StopRecord);
+})
+
+playbackUpload[0].addEventListener("click", function () {
+    ResetPreparedMode();
 })
 
 
+
 export {
-    KeyListeners,
     LoadAudioFiles,
+    PianoModeToggle,
+    ClosePianoModeWindow,
+    KeyListeners,
     ResetInteractiveMode,
     ResetPreparedMode
 }
