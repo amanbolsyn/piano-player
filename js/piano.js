@@ -310,6 +310,8 @@ function ResetPreparedMode() {
     playbackStop[0].removeEventListener("click", StopRecord)
     uploadSongInput.value = "";
     playTimeoutIds = [];
+    globalGainNode.gain.value = 0.5;
+    playbackVolume.value = 50;
 
 }
 
