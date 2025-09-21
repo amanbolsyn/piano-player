@@ -49,6 +49,7 @@ const playbackUpload = document.querySelectorAll(".play-controls>.upload-record-
 const playbackStop = document.querySelectorAll(".play-controls>.stop-record-button");
 const playbackVolume = document.getElementById("volume");
 const playbackSpeed = document.getElementById("speed")
+let recordSpeed = playbackSpeed.value;
 
 const closePianoModeBttn = document.querySelector("#piano-mode-window .close-button");
 
@@ -327,6 +328,7 @@ playbackVolume.addEventListener("input", function () {
 });
 
 playbackSpeed.addEventListener("change", function(){
+    recordSpeed = playbackSpeed.value;
     StopRecord();
 })
 
@@ -334,7 +336,7 @@ function playNote(file) {
 
     const source = audioCtx.createBufferSource();
     source.buffer = bufferFiles[file];
-    source.playbackRate.value = playbackSpeed.value;
+    source.playbackRate.value = recordSpeed;
 
     // Create a GainNode
     source.connect(globalGainNode);
@@ -525,7 +527,7 @@ function PlaySong() {
                 setTimeout(() => { playedElement.classList.remove("active-black") }, 1000);
             }
 
-        }, startTime/playbackSpeed.value)
+        }, startTime/recordSpeed)
 
         playTimeoutIds.push(timeoutId);
     }

@@ -2,6 +2,19 @@
 
 Browser application called piano-player is capable of: 
 
++ interact with the piano without recording 
++ recording songs and exporting them in a json format
++ playing pre-recroded songs by improting exported json files
++ includes playback features such as stop, dynamic volume adjustment, and speed control
++ seperate draggable windows such as information, sheet tables, piano modes provide extra info and features
++ responsive designs for different size screens such as horizontal and vertical views on mobile phones
+
+
+## Record mode
+![Record mode](./assets/gifs/recrod-mode.gif)
+
+## Play mode
+![Play mode](./assets/gifs/play-mode.gif)
 ## Installation
 
 Open up your terminal and run this command 
@@ -28,8 +41,21 @@ Congratulations you installed my application. Hopefully you will be able to enjo
 
 ## Possible improvements 
 
++ adding backend 
++ styling range sliders for volume and speed controls
++ adding mute to volume button 
++ display speed amount when slidering 
++ adding accessibility features
 
-## Bugs 
+## Bugs/Needs to be done
+
++ remove Drop and Drag events on mobile 
++ add pause and resume audio
++ when draggin on safari wrong window container clone appers instead of correct one
++ optimize and organize js functions
++ organize styles
++ orgonize responsive styles 
++ add comments 
 
 
 ## Resources 
@@ -37,6 +63,7 @@ Congratulations you installed my application. Hopefully you will be able to enjo
 + [SVG files](https://www.svgrepo.com)
 + [JS documenation](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 + [Project by Alem School](https://alem.school)
++ [Project requirenments](https://github.com/alem-platform/frontend/tree/main/piano-player)
 
 ## Contributing
 
