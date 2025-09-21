@@ -1,6 +1,6 @@
 # Piano Player
 
-Browser application called piano-player is capable of: 
+Browser application called [piano-player (live-preview)](https://amanbolsyn.github.io/piano-player/main.html) is capable of: 
 
 + interact with the piano without recording 
 + recording songs and exporting them in a json format

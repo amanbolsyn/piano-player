@@ -1,0 +1,491 @@
+{
+  "name": "golden hour",
+  "duration": 18175,
+  "notes": [
+    {
+      "key": "Gb3",
+      "startTime": 947,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 1146,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 1349,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 1484,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 1681,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 1822,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 2003,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 2170,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 2374,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 2522,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 2695,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 2822,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 3003,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 3210,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 3330,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 3497,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 3673,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 3777,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 3972,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 4144,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 4271,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 4428,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 4607,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 4739,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 4925,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 5128,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 5249,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 5413,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 5577,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 5766,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 6001,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 6166,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 6289,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 6485,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 6638,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 6810,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 6978,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 7162,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 7299,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 7462,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 7650,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 7820,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 8001,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 8175,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 8301,
+      "duration": 2.40325
+    },
+    {
+      "key": "Db4",
+      "startTime": 8462,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 8638,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 8749,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 8963,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 9131,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 9287,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 9408,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 9560,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 9740,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 9953,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 10149,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 10309,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 10462,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 10661,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 10827,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 11006,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 11184,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 11336,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 11491,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 11655,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 11863,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 12032,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 12187,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 12348,
+      "duration": 2.40325
+    },
+    {
+      "key": "B3",
+      "startTime": 12493,
+      "duration": 2.40325
+    },
+    {
+      "key": "A3",
+      "startTime": 12690,
+      "duration": 2.40325
+    },
+    {
+      "key": "Eb3",
+      "startTime": 13097,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 13201,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 13439,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 13546,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 13742,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 13915,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 14122,
+      "duration": 2.40325
+    },
+    {
+      "key": "Eb3",
+      "startTime": 14216,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 14424,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 14647,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 14791,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 14967,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 15096,
+      "duration": 2.40325
+    },
+    {
+      "key": "Eb3",
+      "startTime": 15256,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 15424,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 15532,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 15680,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 15852,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 16013,
+      "duration": 2.40325
+    },
+    {
+      "key": "Eb3",
+      "startTime": 16258,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 16418,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 16611,
+      "duration": 2.40325
+    },
+    {
+      "key": "Ab3",
+      "startTime": 16746,
+      "duration": 2.40325
+    },
+    {
+      "key": "Gb3",
+      "startTime": 16939,
+      "duration": 2.40325
+    },
+    {
+      "key": "E3",
+      "startTime": 17042,
+      "duration": 2.40325
+    },
+    {
+      "key": "Eb3",
+      "startTime": 17261,
+      "duration": 2.40325
+    }
+  ]
+}
