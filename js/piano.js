@@ -35,6 +35,7 @@ const errorName = document.querySelectorAll(".name-error");
 let uploadedSongData;
 
 //prepared mode vars
+const prepared = document.getElementById("prepared-mode");
 const uploadSection = document.querySelectorAll(".upload-section");
 const uploadSongInput = document.getElementById("upload-song-file");
 const uploadError = document.querySelectorAll(".upload-error");
@@ -55,7 +56,8 @@ let startNoteIdx = 0;
 const closePianoModeBttn = document.querySelector("#piano-mode-window .close-button");
 
 // song name window vars 
-const closeSongWindow = document.getElementById("song-name-close");
+const closeSongWindowBttn = document.getElementById("song-name-close");
+const closeSongWindowIcon = document.querySelector("#song-name-window .close-button")
 const saveSongNameBttn = document.getElementById("song-name-save");
 
 async function LoadAudioFiles() {
@@ -79,9 +81,9 @@ function ShowPianoMode(isChecked) {
             preparedSections[i].style.display = "none";
             interactiveSections[i].style.display = "flex";
             pianoWindowHeadings[i].innerText = "record";
-
-            ResetPreparedMode();
         }
+
+        ResetPreparedMode();
 
     } else if (isChecked) {//prepared section
 
@@ -90,9 +92,9 @@ function ShowPianoMode(isChecked) {
             preparedSections[i].style.display = "flex"
             pianoWindowHeadings[i].innerText = "play record";
 
-            ResetInteractiveMode();
-        }
 
+        }
+        ResetInteractiveMode();
     }
 
     //automatically close info window during mode switch on mobile phones
@@ -110,7 +112,6 @@ function ShowPianoMode(isChecked) {
 function PianoModeToggle() {
 
     const interactive = document.getElementById("interactive-mode");
-    const prepared = document.getElementById("prepared-mode");
     let selectedMode = localStorage.getItem("piano-mode")
 
 
@@ -135,7 +136,6 @@ function PianoModeToggle() {
     })
 
     prepared.addEventListener("change", function () {
-
         localStorage.setItem("piano-mode", "prepared");
         ShowPianoMode(true);
     })
@@ -161,7 +161,6 @@ function ClosePianoModeWindow() {
             ShowPianoMode(false);
             localStorage.setItem("piano-mode", "interactive")
             interactive.checked = true
-            ResetPreparedMode()
         }
 
     })
@@ -385,7 +384,10 @@ async function GetSongName() {
 
             songNameForm.removeEventListener("submit", ValidateName);
             saveSongNameBttn.removeEventListener("click", ValidateName);
+            closeSongWindowBttn.removeEventListener("click", () => { CancelPromise(); ResetInteractiveMode() })
+            closeSongWindowIcon.removeEventListener("click", () => { CancelPromise(); ResetInteractiveMode() })
             closePianoModeBttn.removeEventListener("click", CancelPromise);
+            prepared.removeEventListener("change", CancelPromise);
 
         }
 
@@ -397,7 +399,11 @@ async function GetSongName() {
 
         songNameForm.addEventListener("submit", ValidateName);
         saveSongNameBttn.addEventListener("click", ValidateName);
-        closePianoModeBttn.addEventListener("click", CancelPromise)
+        closeSongWindowBttn.addEventListener("click", () => { CancelPromise(); ResetInteractiveMode() })
+        closeSongWindowIcon.addEventListener("click", () => { CancelPromise(); ResetInteractiveMode() })
+        closePianoModeBttn.addEventListener("click", CancelPromise);
+        prepared.addEventListener("change", CancelPromise);
+
 
     });
 }
@@ -511,14 +517,14 @@ function CheckJSON(song) {
 function PlaySong() {
 
     let pausedBaseNote = 0;
-    if(startNoteIdx>0){
-        pausedBaseNote = parsedSong.notes[startNoteIdx].startTime;
+    if (startNoteIdx > 0) {
+        pausedBaseNote = parsedSong.notes[startNoteIdx-1].startTime;
     }
 
     for (let i = startNoteIdx; i < parsedSong.notes.length; i++) {
 
         let key = parsedSong.notes[i].key;
-        let startTime = parsedSong.notes[i].startTime/recordSpeed-pausedBaseNote;
+        let startTime = (parsedSong.notes[i].startTime - pausedBaseNote)/ recordSpeed ;
         const playedElement = document.querySelector(`[data-note="${key}"]`)
 
 
@@ -527,10 +533,10 @@ function PlaySong() {
             playNote(`${key}.mp3`)
             if (playedElement.classList.contains("white-key")) {
                 playedElement.classList.add("active-white")
-                setTimeout(() => { playedElement.classList.remove("active-white") }, 1000);
+                setTimeout(() => { playedElement.classList.remove("active-white") }, 500);
             } else if (playedElement.classList.contains("black-key")) {
                 playedElement.classList.add("active-black");
-                setTimeout(() => { playedElement.classList.remove("active-black") }, 1000);
+                setTimeout(() => { playedElement.classList.remove("active-black") }, 500);
             }
 
 
@@ -549,7 +555,7 @@ function PlaySong() {
             playRecordBttns[i].classList.remove("none");
             startNoteIdx = 0;
         }
-    }, parsedSong.duration / playbackSpeed.value)
+    }, (parsedSong.duration - pausedBaseNote)/ playbackSpeed.value)
 
     playTimeoutIds.push(timeoutId);
 }
@@ -626,7 +632,7 @@ pauseRecordBttns[0].addEventListener("click", function () {
         clearTimeout(playTimeoutIds[i]);
     }
 
-    startNoteIdx = parsedSong.notes.length+1- playTimeoutIds.length;
+    startNoteIdx = parsedSong.notes.length  - playTimeoutIds.length+1;
     playTimeoutIds = []
 
     //display play button
@@ -635,8 +641,6 @@ pauseRecordBttns[0].addEventListener("click", function () {
         playRecordBttns[i].classList.remove("none");
     }
 
-
-    playbackStop[0].removeEventListener("click", StopRecord);
 })
 
 playbackUpload[0].addEventListener("click", function () {

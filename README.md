@@ -5,7 +5,7 @@ Browser application called [piano-player (live-preview)](https://amanbolsyn.gith
 + interact with the piano without recording 
 + recording songs and exporting them in a json format
 + playing pre-recroded songs by improting exported json files
-+ includes playback features such as stop, dynamic volume adjustment, and speed control
++ includes playback features such as stop, pause, dynamic volume adjustment, and speed control
 + seperate draggable windows such as information, sheet tables, piano modes provide extra info and features
 + responsive designs for different size screens such as horizontal and vertical views on mobile phones
 
@@ -50,8 +50,7 @@ Congratulations you installed my application. Hopefully you will be able to enjo
 ## Bugs/Needs to be done
 
 + remove Drop and Drag events on mobile 
-+ add pause and resume audio
-+ when draggin on safari wrong window container clone appers instead of correct one
++ when dragging on safari wrong window container clone appers instead of correct one
 + optimize and organize js functions
 + organize styles
 + orgonize responsive styles 
