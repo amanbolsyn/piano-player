@@ -50,6 +50,7 @@ const playbackStop = document.querySelectorAll(".play-controls>.stop-record-butt
 const playbackVolume = document.getElementById("volume");
 const playbackSpeed = document.getElementById("speed")
 let recordSpeed = playbackSpeed.value;
+let startNoteIdx = 0;
 
 const closePianoModeBttn = document.querySelector("#piano-mode-window .close-button");
 
@@ -327,7 +328,7 @@ playbackVolume.addEventListener("input", function () {
     globalGainNode.gain.value = playbackVolume.value / 100;
 });
 
-playbackSpeed.addEventListener("change", function(){
+playbackSpeed.addEventListener("change", function () {
     recordSpeed = playbackSpeed.value;
     StopRecord();
 })
@@ -509,10 +510,15 @@ function CheckJSON(song) {
 
 function PlaySong() {
 
-    for (let i = 0; i < parsedSong.notes.length; i++) {
+    let pausedBaseNote = 0;
+    if(startNoteIdx>0){
+        pausedBaseNote = parsedSong.notes[startNoteIdx].startTime;
+    }
+
+    for (let i = startNoteIdx; i < parsedSong.notes.length; i++) {
 
         let key = parsedSong.notes[i].key;
-        let startTime = parsedSong.notes[i].startTime;
+        let startTime = parsedSong.notes[i].startTime/recordSpeed-pausedBaseNote;
         const playedElement = document.querySelector(`[data-note="${key}"]`)
 
 
@@ -527,17 +533,23 @@ function PlaySong() {
                 setTimeout(() => { playedElement.classList.remove("active-black") }, 1000);
             }
 
-        }, startTime/recordSpeed)
+
+            playTimeoutIds.shift()
+
+
+        }, startTime)
 
         playTimeoutIds.push(timeoutId);
+
     }
 
     let timeoutId = setTimeout(() => {
         for (let i = 0; i < 2; i++) {
             pauseRecordBttns[i].classList.add("none")
             playRecordBttns[i].classList.remove("none");
+            startNoteIdx = 0;
         }
-    }, parsedSong.duration/playbackSpeed.value)
+    }, parsedSong.duration / playbackSpeed.value)
 
     playTimeoutIds.push(timeoutId);
 }
@@ -587,11 +599,13 @@ function StopRecord() {
         playRecordBttns[i].classList.remove("none");
     }
 
+    startNoteIdx = 0;
     playTimeoutIds = []
     playbackStop[0].removeEventListener("click", StopRecord);
 }
 
 playRecordBttns[0].addEventListener("click", function () {
+
     PlaySong();
 
     //display pause buttons
@@ -607,11 +621,20 @@ playRecordBttns[0].addEventListener("click", function () {
 
 pauseRecordBttns[0].addEventListener("click", function () {
 
+
+    for (let i = 0; i < playTimeoutIds.length; i++) {
+        clearTimeout(playTimeoutIds[i]);
+    }
+
+    startNoteIdx = parsedSong.notes.length+1- playTimeoutIds.length;
+    playTimeoutIds = []
+
     //display play button
     for (let i = 0; i < 2; i++) {
         pauseRecordBttns[i].classList.add("none")
         playRecordBttns[i].classList.remove("none");
     }
+
 
     playbackStop[0].removeEventListener("click", StopRecord);
 })
