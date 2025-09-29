@@ -724,6 +724,36 @@ td:nth-of-type(2) {
   padding: 0.2em 0.1em 0.1em 0.2em
 }
 
+#speed,
+#volume {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+}
+
+#speed::-webkit-slider-runnable-track,
+#volume::-webkit-slider-runnable-track {
+  height: 10px;
+  /* border-radius: 20px; */
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
+  /* background-color: rgb(255, 59, 59); */
+  margin: 0px 5px;
+}
+
+#speed::-webkit-slider-thumb,
+#volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 27px;
+  height: 35px;
+  background-image: url("../assets/icons/header/show-music-sheets.svg");
+  position: relative;
+  top: -14px;
+}
+
 
 #song-name-window {
   top: 60%;

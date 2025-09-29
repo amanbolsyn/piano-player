@@ -1,5 +1,5 @@
-import { KeyListeners} from "./piano.js"
-import {LoadAudioFiles } from "./piano.js"
+import { KeyListeners } from "./piano.js"
+import { LoadAudioFiles } from "./piano.js"
 import { PianoModeToggle } from "./piano.js";
 import { ClosePianoModeWindow } from "./piano.js";
 
@@ -23,22 +23,21 @@ const songNameWindow = document.getElementById("song-name-window")
 
 document.addEventListener("DOMContentLoaded", async function () {
 
-    //handels event listenners to each black and white key 
+    //Handels event listenners to each black and white key 
     KeyListeners();
 
-    //controls z index level of window containers when clicked 
-    //makes window container to move forward whenc clicked
+    //Controls z index level of window containers when clicked 
+    //Makes window container to move forward whenc clicked
     WindowZLevel();
 
-    //note hints logic
+    //Note hints logic
     NoteHints();
 
     PianoModeToggle();
     ClosePianoModeWindow();
 
-     await LoadAudioFiles()
 
-    //note sheets window logic
+    //Note sheets window logic
     NoteSheets();
     closeWindowBttns.forEach((closeBttn) => {
         closeBttn.addEventListener("click", function (e) {
@@ -47,38 +46,40 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
 
-    //adding drag event to windows
+    //Adding drag event to windows
     if (window.innerWidth > 649) {
         ApplyDragEvent();
     }
 
-    //information window logic
+    //Information window logic
     ShowInformationWindow();
     infoCloseBttn.addEventListener("click", function () {
         CloseInformationWindow();
     })
 
+    await LoadAudioFiles()
+
     window.addEventListener("resize", function () {
 
 
-        // close all windows when resizing
+        //Close all windows when resizing
         for (const sheetTable of sheetTables) {
             CloseSheetWindow(sheetTable.id);
         }
 
-        //close window containers only for tablets and desktop screens
+        //Close window containers only for tablets and desktop screens
         if (this.innerWidth > 649 && this.innerHeight > 499) {
             CloseInformationWindow();
         }
 
-        //remove all inline styles of window containers if screen width is less then 600 pixels
+        //Remove all inline styles of window containers if screen width is less then 600 pixels
         if (this.innerWidth < 600) {
             for (const windowContainer of windowContainers) {
                 windowContainer.removeAttribute("style");
             }
         }
 
-        //remove all inline styles of piano mode window and song name window every time when screen resizes
+        //Remove all inline styles of piano mode window and song name window every time when screen resizes
         pianoModeWindow.removeAttribute("style");
         songNameWindow.removeAttribute("style");
 
