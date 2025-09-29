@@ -42,7 +42,6 @@ Congratulations you installed my application. Hopefully you will be able to enjo
 ## Possible improvements 
 
 + adding backend 
-+ styling range sliders for volume and speed controls
 + adding mute to volume button 
 + display speed amount when slidering 
 + adding accessibility features
@@ -54,7 +53,6 @@ Congratulations you installed my application. Hopefully you will be able to enjo
 + optimize and organize js functions
 + organize styles
 + orgonize responsive styles 
-+ add comments 
 
 
 ## Resources 

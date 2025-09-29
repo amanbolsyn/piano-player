@@ -1,5 +1,5 @@
 :root {
-  --animation-state: running;
+  --animation-state: running; 
 }
 
 .flex {
@@ -102,6 +102,7 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
+/* HEADER STYLING */
 .header {
   grid-area: header;
   display: grid;
@@ -179,6 +180,8 @@ header label {
   padding: 0.4em 0.25em 0.25em 0.55em;
 }
 
+
+/* MAIN STYLING */
 .main {
   grid-area: main;
   display: grid;
@@ -413,9 +416,10 @@ header label {
   transform-origin: top;
 }
 
+/* WINDOW STYLING */
+
 .window-container,
 .window-container-clone {
-  /* position/layout */
   position: absolute;
   z-index: 3;
   min-width: 250px;
@@ -503,6 +507,7 @@ header label {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+/* WINDOW SHEETS STYLING */
 table {
   width: 12vw;
   min-width: 250px;
@@ -533,6 +538,7 @@ td:nth-of-type(2) {
 }
 
 
+/* INFORMATION WINDOW STYLING */
 #information-window {
   top: 20%;
   left: 20%;
@@ -570,7 +576,7 @@ td:nth-of-type(2) {
   font-size: 1em;
 }
 
-/* PIANO MODE STYLING */
+/* PIANO MODE WINDOW STYLING */
 
 #piano-mode-window {
   top: 62%;
@@ -724,8 +730,7 @@ td:nth-of-type(2) {
   padding: 0.2em 0.1em 0.1em 0.2em
 }
 
-#speed,
-#volume {
+.playback-section input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -733,19 +738,24 @@ td:nth-of-type(2) {
 
 }
 
-#speed::-webkit-slider-runnable-track,
-#volume::-webkit-slider-runnable-track {
+.playback-section input[type="range"]::-webkit-slider-runnable-track {
   height: 10px;
-  /* border-radius: 20px; */
   border: 1px solid black;
   border-left: none;
   border-right: none;
-  /* background-color: rgb(255, 59, 59); */
   margin: 0px 5px;
 }
 
-#speed::-webkit-slider-thumb,
-#volume::-webkit-slider-thumb {
+/* Firefox range track styling */
+.playback-section input[type="range"]::-moz-range-track {
+  height: 10px;
+  border: 1px solid black;
+  border-left: none;
+  border-right: none;
+  margin: 0px 5px;
+}
+
+.playback-section input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 27px;
   height: 35px;
@@ -754,6 +764,15 @@ td:nth-of-type(2) {
   top: -14px;
 }
 
+/* Firefox range thumb styling */
+.playback-section input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  width: 27px;
+  height: 35px;
+  background-image: url("../assets/icons/header/show-music-sheets.svg");
+  position: relative;
+  top: -14px;
+}
 
 #song-name-window {
   top: 60%;
@@ -835,6 +854,8 @@ td:nth-of-type(2) {
   color: black;
 }
 
+
+/* HOVER STYLES */
 @media only screen and (min-width: 600px) and (min-height: 400px) {
 
   #logo:hover {

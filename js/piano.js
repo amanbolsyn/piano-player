@@ -217,7 +217,7 @@ function KeyListeners() {
 
     //Mouse events on piano keys
     pianoKeys.forEach((pianoKey) => {
-        pianoKey.addEventListener("mousedown", function (e) {
+        pianoKey.addEventListener("mousedown", function () {
             let file = `${pianoKey.getAttribute("data-note")}.mp3`
             playNote(file);
         })
@@ -548,7 +548,7 @@ function CheckJSON(song) {
     }
 
     //Checking for valid key values
-    if (!(parsedSong.hasOwnProperty("name") && parsedSong.hasOwnProperty("duration") && parsedSong.hasOwnProperty("notes"))) {
+    if (!(Object.hasOwn(parsedSong, "name") && Object.hasOwn(parsedSong,"duration") && Object.hasOwn(parsedSong, "notes"))) {
         console.error("invalid json format")
         uploadError[0].innerText = "invalid json format";
         uploadError[1].innerText = "invalid json format";
